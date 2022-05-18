@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:give_easy/constants.dart';
+import 'package:give_easy/components/input_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -43,22 +45,20 @@ class _LoginScreenState extends State<LoginScreen>
                 ),
               ),
             ),
-            TextField(
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                focusedBorder: InputBorder.none,
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: InputTextField(
+                hintWord: 'Enter Email',
+                isObscure: false,
               ),
             ),
             SizedBox(
               height: 5.0,
             ),
-            TextField(
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                focusedBorder: InputBorder.none,
-              ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child:
+                  InputTextField(hintWord: 'Enter Password', isObscure: true),
             ),
           ]),
         ),
