@@ -17,15 +17,6 @@ class GiveEasy extends StatelessWidget {
         LoginScreen.id: (context) => LoginScreen(),
         RegisterationScreen.id: (context) => RegisterationScreen(),
       },
-      // home: LandingScreen(),
-      // routes: {
-      //   '/login' : Login.id,
-      //   '/Registeration' : Registeration.id,
-      //   '/HomePage' : HomePage.id,
-      //   '/SpecificDonation' : SpecificDonation.id,
-      //   '/Payment' : Payment.id,
-      //   '/ThankYou' : ThankYou.id,
-      // },
     );
   }
 }
