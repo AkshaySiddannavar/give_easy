@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:give_easy/screens/all_screens.dart';
 import 'package:give_easy/screens/login.dart';
+import 'package:give_easy/constants.dart';
 
 class LandingScreen extends StatelessWidget {
   static const String id = 'landing_screen';
@@ -14,12 +16,9 @@ class LandingScreen extends StatelessWidget {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Hero(
               tag: 'appIconTransition',
-              child: SizedBox(
+              child: Container(
                 height: 50.0,
-                child: FaIcon(
-                  size: 50.0,
-                  FontAwesomeIcons.handshake,
-                ),
+                child: Image.asset('assets/images/handshake.png'),
               ),
             ),
             TextButton(
@@ -31,7 +30,13 @@ class LandingScreen extends StatelessWidget {
                 Navigator.pushNamed(context, LoginScreen.id);
               },
             ),
-            TextButton(onPressed: () {}, child: Text('Register')),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, RegisterationScreen.id);
+                },
+                child: Text(
+                  'Register',
+                )),
           ]),
         ),
       ),

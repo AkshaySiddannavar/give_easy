@@ -14,7 +14,8 @@ class GiveEasy extends StatelessWidget {
       initialRoute: LandingScreen.id,
       routes: {
         LandingScreen.id: (context) => LandingScreen(),
-        LoginScreen.id: ((context) => LoginScreen())
+        LoginScreen.id: (context) => LoginScreen(),
+        RegisterationScreen.id: (context) => RegisterationScreen(),
       },
       // home: LandingScreen(),
       // routes: {
