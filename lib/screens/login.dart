@@ -12,24 +12,7 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen>
-    with SingleTickerProviderStateMixin {
-  // late AnimationController heroIconController;
-  @override
-  void initState() {
-    super.initState();
-    // heroIconController = AnimationController(
-    //     vsync: this,
-    //     duration: Duration(seconds: 2),
-    //     lowerBound: 50.0,
-    //     upperBound: 150.0);
-
-    // heroIconController.forward();
-    // heroIconController.addListener(() {
-    //   setState(() {});
-    // });
-  }
-
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
