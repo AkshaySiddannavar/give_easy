@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/constants.dart';
 import 'package:give_easy/components/input_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class RegisterationScreen extends StatefulWidget {
   static const String id = 'Registeration_screen';
@@ -13,6 +15,14 @@ class RegisterationScreen extends StatefulWidget {
 }
 
 class _RegisterationScreenState extends State<RegisterationScreen> {
+  final FirebaseAuth _auth = FirebaseAuth
+      .instance; //The entry point of the Firebase Authentication SDK
+  late String email, password;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +48,13 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: InputTextField(
-                      hintWord: 'Enter Email',
-                      isObscure: false,
+                      type: TextInputType.emailAddress,
+                      hintMessage: 'Enter Email',
+                      isSensitive: false,
+                      currentTextCallback: (value) {
+                        email = value;
+                        // print(email);
+                      },
                     ),
                   ),
                 ),
@@ -50,7 +65,13 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: InputTextField(
-                        hintWord: 'Enter Password', isObscure: true),
+                      hintMessage: 'Enter Password',
+                      isSensitive: true,
+                      currentTextCallback: (value) {
+                        password = value;
+                        // print(password);
+                      },
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -58,7 +79,10 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                 ),
                 ActionButton(
                   buttonText: 'Register',
-                  buttonActionCallback: () {},
+                  buttonActionCallback: () {
+                    _auth.createUserWithEmailAndPassword(
+                        email: email, password: password);
+                  },
                 ),
               ]),
         ),

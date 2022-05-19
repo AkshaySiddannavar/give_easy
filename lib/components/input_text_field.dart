@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:give_easy/constants.dart';
 
 class InputTextField extends StatefulWidget {
-  final String hintWord;
-  final bool isObscure;
+  final String hintMessage;
+  final TextInputType type; //type of keyboard
+  final bool isSensitive; // for sensitive data
+  final void Function(String)? currentTextCallback;
   const InputTextField(
-      {Key? key, required this.hintWord, required this.isObscure})
+      {Key? key,
+      required this.hintMessage,
+      required this.isSensitive,
+      required this.currentTextCallback,
+      this.type = TextInputType.text})
       : super(key: key);
 
   @override
@@ -13,12 +19,15 @@ class InputTextField extends StatefulWidget {
 }
 
 class _InputTextFieldState extends State<InputTextField> {
+  late String currentText;
   @override
   Widget build(BuildContext context) {
     return TextField(
-        obscureText: widget.isObscure,
+        keyboardType: widget.type,
+        onChanged: widget.currentTextCallback,
+        obscureText: widget.isSensitive,
         textAlign: TextAlign.center,
         decoration:
-            kInputTextFieldDecoration.copyWith(hintText: widget.hintWord));
+            kInputTextFieldDecoration.copyWith(hintText: widget.hintMessage));
   }
 }
