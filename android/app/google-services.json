@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "976142245865",
+    "project_id": "give-easy",
+    "storage_bucket": "give-easy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976142245865:android:5d1f45b04809af4fb53578",
+        "android_client_info": {
+          "package_name": "give_easy.co.give_easy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976142245865-qp8hguqbjpetof7vj0nc3tkqeiqudnqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDslYVkfnXHJ16n7g4Be_AFoEcpGwri_8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "976142245865-qp8hguqbjpetof7vj0nc3tkqeiqudnqt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
