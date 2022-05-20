@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:give_easy/screens/all_screens.dart';
 import 'package:firebase_core/firebase_core.dart';
+import '../firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const GiveEasy());
 }
 
@@ -19,6 +20,7 @@ class GiveEasy extends StatelessWidget {
         LandingScreen.id: (context) => LandingScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         RegisterationScreen.id: (context) => RegisterationScreen(),
+        HomeScreen.id: (context) => HomeScreen(),
       },
     );
   }
