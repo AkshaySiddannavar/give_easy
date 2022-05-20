@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/constants.dart';
 import 'package:give_easy/components/input_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:give_easy/screens/all_screens.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -13,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
+  late String email, password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: InputTextField(
-                      hintWord: 'Enter Email',
-                      isObscure: false,
+                      type: TextInputType.emailAddress,
+                      hintMessage: 'Enter Email',
+                      isSensitive: false,
+                      currentTextCallback: (value) {
+                        email = value;
+                      },
                     ),
                   ),
                 ),
@@ -50,7 +58,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: InputTextField(
-                        hintWord: 'Enter Password', isObscure: true),
+                      hintMessage: 'Enter Password',
+                      isSensitive: true,
+                      currentTextCallback: (value) {
+                        password = value;
+                      },
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -58,7 +71,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 ActionButton(
                   buttonText: 'Login',
-                  buttonActionCallback: () {},
+                  buttonActionCallback: () async {
+                    try {
+                      var currentUserCredentials =
+                          await _auth.signInWithEmailAndPassword(
+                              email: email, password: password);
+
+                      Navigator.pushNamed(context, HomeScreen.id);
+                    } catch (e) {
+                      print('error message is : $e');
+                    }
+                  },
                 ),
               ]),
         ),
