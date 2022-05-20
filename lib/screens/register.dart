@@ -5,6 +5,7 @@ import 'package:give_easy/constants.dart';
 import 'package:give_easy/components/input_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:give_easy/screens/home_screen.dart';
 
 class RegisterationScreen extends StatefulWidget {
   static const String id = 'Registeration_screen';
@@ -79,9 +80,16 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                 ),
                 ActionButton(
                   buttonText: 'Register',
-                  buttonActionCallback: () {
-                    _auth.createUserWithEmailAndPassword(
-                        email: email, password: password);
+                  buttonActionCallback: () async {
+                    try {
+                      var currentUserCredentials =
+                          await _auth.createUserWithEmailAndPassword(
+                              email: email, password: password);
+
+                      Navigator.pushNamed(context, HomeScreen.id);
+                    } catch (e) {
+                      print('error message is $e');
+                    }
                   },
                 ),
               ]),
