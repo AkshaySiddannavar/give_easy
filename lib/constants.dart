@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:give_easy/components/preview_card.dart';
 
 const kInputTextFieldDecoration = InputDecoration(
   hintText: 'Hint Text Here',
@@ -16,3 +17,16 @@ const kInputTextFieldDecoration = InputDecoration(
     ),
   ),
 );
+
+const String kDefaultPreviewImagePath = '/images/handshake.png';
+//Default Preview Image Path for preview_card
+
+const Image kDefaultPreviewImage =
+    Image(image: AssetImage(kDefaultPreviewImagePath));
+//Default Preview Image for preview_card
+
+const kDefaultCategorySpecificListContent = [
+  PreviewCard(
+    previewImage: kDefaultPreviewImage,
+  )
+];
