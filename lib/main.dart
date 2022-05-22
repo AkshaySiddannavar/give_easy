@@ -21,6 +21,9 @@ class GiveEasy extends StatelessWidget {
         LoginScreen.id: (context) => LoginScreen(),
         RegisterationScreen.id: (context) => RegisterationScreen(),
         HomeScreen.id: (context) => HomeScreen(),
+        SpecificDonationScreen.id: (context) => SpecificDonationScreen(),
+        //add route to SpecificDonationScreen
+        //becasue : - for easier debugging, for navigation from a preview card tap to respeective specific donation screen
       },
     );
   }
