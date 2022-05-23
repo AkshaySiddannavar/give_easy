@@ -3,20 +3,30 @@ import 'package:flutter/material.dart';
 class ActionButton extends StatelessWidget {
   final String buttonText;
   final void Function()? buttonActionCallback;
+  final Color buttonColor;
+  final double verticalPadding;
+  final double horizontalPadding;
+
   const ActionButton(
-      {Key? key, required this.buttonText, required this.buttonActionCallback})
+      {Key? key,
+      required this.buttonText,
+      required this.buttonActionCallback,
+      this.buttonColor = Colors.amber,
+      this.horizontalPadding = 25.0,
+      this.verticalPadding = 15.0})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 15.0,
-        horizontal: 25.0,
+    return Container(
+      color: Colors.transparent,
+      padding: EdgeInsets.symmetric(
+        vertical: verticalPadding,
+        horizontal: horizontalPadding,
       ),
       child: Material(
         elevation: 5.0,
-        color: Colors.amber,
+        color: buttonColor,
         borderRadius: const BorderRadius.all(
           Radius.circular(50.0),
         ),
