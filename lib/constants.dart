@@ -18,7 +18,7 @@ const kInputTextFieldDecoration = InputDecoration(
   ),
 );
 
-const String kDefaultPreviewImagePath = '/images/handshake.png';
+const String kDefaultPreviewImagePath = 'assets/images/handshake.png';
 //Default Preview Image Path for preview_card
 
 const Image kDefaultPreviewImage =
