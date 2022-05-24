@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:give_easy/screens/all_screens.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:give_easy/screens/payment_screen.dart';
 import '../firebase_options.dart';
 
 void main() async {
@@ -22,8 +23,9 @@ class GiveEasy extends StatelessWidget {
         RegisterationScreen.id: (context) => RegisterationScreen(),
         HomeScreen.id: (context) => HomeScreen(),
         SpecificDonationScreen.id: (context) => SpecificDonationScreen(),
-        //add route to SpecificDonationScreen
-        //becasue : - for easier debugging, for navigation from a preview card tap to respeective specific donation screen
+        PaymentScreen.id: (context) => PaymentScreen(),
+        //add route to PaymentScreen
+        //becasue : - for easier debugging, for navigation
       },
     );
   }
