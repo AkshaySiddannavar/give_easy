@@ -30,3 +30,7 @@ const kDefaultCategorySpecificListContent = [
     previewImage: kDefaultPreviewImage,
   )
 ];
+
+const int kMaxAmountAllowed = 100 * 1000;
+//maximum amount of donation allowed per transaction
+//int * int = int (dart)
