@@ -3,6 +3,7 @@ import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/constants.dart';
 import 'package:give_easy/screens/all_screens.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class PaymentScreen extends StatefulWidget {
   static const String id = "payment_screen";
@@ -17,7 +18,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   final Razorpay _razorpay = Razorpay();
   String currentString = '';
   num currentNum = 0;
-
+  String errorToastMessage = '';
   void openCheckout() {
     //For now options is hardcoded
     //lataer on it will take values for many parameters from actual donation requester data and donor data
@@ -57,22 +58,65 @@ class _PaymentScreenState extends State<PaymentScreen> {
   //done - understand ExternalWalletResponse object so that you can use its parameters properly
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    //TODO: 4. Do something when payment succeeds, show a widget of confirmation and re-direct to Thank You screen
+    //Do something when payment succeeds, show a widget of confirmation and/or re-direct to Thank You screen
     print(
         'Order ID : ${response.orderId} \nPayment ID : ${response.paymentId} \nSignature: ${response.signature}');
     //order ID : null | Payment ID : somevlaue | Signature: null
     Navigator.pushNamed(context, ThankYouScreen.id);
+    showToast(
+      'Payment Successful ✅',
+      context: context,
+      animation: StyledToastAnimation.scale,
+      reverseAnimation: StyledToastAnimation.fade,
+      position: StyledToastPosition.bottom,
+      animDuration: Duration(seconds: 1),
+      duration: Duration(seconds: 4),
+      curve: Curves.elasticOut,
+      reverseCurve: Curves.linear,
+      backgroundColor: Colors.greenAccent,
+    );
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    //TODO: 5. Do something when payment fail, show a widget of confirmation and re-direct to some error information screen(to be createad)
+    //Do something when payment fail, show a widget of confirmation and/or re-direct to some error information screen(to be created)
 
     print(
         'Error Code : ${response.code} \nError Message : ${response.message}');
+
+    //depending upon error codes you have to decide whether to show a toast or to go to some error screen
+    if (response.message ==
+        'Invalid amount (should be passed in integer paise. Minimum value is 100 paise, i.e. ₹ 1)') {
+      errorToastMessage =
+          'Invalid amount\n1.Enter Amount In Rupees\n2.Enter A Valid Number more than 0';
+    } else if (response.message ==
+        '{"error":{"code":"BAD_REQUEST_ERROR","description":"Payment processing cancelled by user","source":"customer","step":"payment_authentication","reason":"payment_cancelled"}}') {
+      errorToastMessage = 'Payment Cancelled By You';
+    } else if (response.message == '{"description":"Network error"}') {
+      errorToastMessage =
+          'Network Issues\nPlease Connect To Internet\nor\nPlease check your network connection';
+    } else if (response.message == '{"description":"Network error"}') {
+      errorToastMessage =
+          'Network Issues\nPlease Connect To Internet\nor\nPlease check your network connection';
+    } else {
+      errorToastMessage =
+          'Error Occurred ☹️\n\nError Message : ${response.message}';
+    }
+    showToast(
+      errorToastMessage,
+      context: context,
+      animation: StyledToastAnimation.scale,
+      reverseAnimation: StyledToastAnimation.fade,
+      position: StyledToastPosition.center,
+      animDuration: Duration(seconds: 1),
+      duration: Duration(seconds: 5),
+      curve: Curves.elasticOut,
+      reverseCurve: Curves.linear,
+      backgroundColor: Colors.redAccent,
+    );
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    //TODO: 6. Do something when an external wallet was selected, at least print data of wallet
+    //Do something when an external wallet was selected, at least print data of wallet
     print('External Wallet : ${response.walletName}');
   }
 
