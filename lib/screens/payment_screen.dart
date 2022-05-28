@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/constants.dart';
+import 'package:give_easy/screens/all_screens.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -51,15 +52,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   }
 
-  //understand PaymentSuccessResponse object so that you can use its parameters properly
-  //understand PaymentFailureResponse object so that you can use its parameters properly
-  //understand ExternalWalletResponse object so that you can use its parameters properly
+  //done - understand PaymentSuccessResponse object so that you can use its parameters properly
+  //done - understand PaymentFailureResponse object so that you can use its parameters properly
+  //done - understand ExternalWalletResponse object so that you can use its parameters properly
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     //TODO: 4. Do something when payment succeeds, show a widget of confirmation and re-direct to Thank You screen
     print(
         'Order ID : ${response.orderId} \nPayment ID : ${response.paymentId} \nSignature: ${response.signature}');
     //order ID : null | Payment ID : somevlaue | Signature: null
+    Navigator.pushNamed(context, ThankYouScreen.id);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
