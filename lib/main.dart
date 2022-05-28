@@ -24,6 +24,7 @@ class GiveEasy extends StatelessWidget {
         HomeScreen.id: (context) => HomeScreen(),
         SpecificDonationScreen.id: (context) => SpecificDonationScreen(),
         PaymentScreen.id: (context) => PaymentScreen(),
+        ThankYouScreen.id: (context) => ThankYouScreen(),
         //add route to PaymentScreen
         //becasue : - for easier debugging, for navigation
       },
