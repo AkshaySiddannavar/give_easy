@@ -1,6 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:give_easy/components/categorical_tile.dart';
 import 'package:give_easy/components/preview_card.dart';
+import 'package:give_easy/screens/all_screens.dart';
+
+//replaced ListView with a ListView.builder
+//this given list will be rendered on screen
+//works as expected with some minor UI changes which we can focus later on after app is done
+
+List<CategoricalTile> listOfAllCategoricalTiles = [
+  CategoricalTile(categoryName: 'Category 1', categorySpecificList: [
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+  ]),
+  CategoricalTile(categoryName: 'Category 2', categorySpecificList: [
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+  ]),
+  CategoricalTile(categoryName: 'Category 3', categorySpecificList: [
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+  ]),
+  CategoricalTile(categoryName: 'Category 4', categorySpecificList: [
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+  ]),
+  CategoricalTile(categoryName: 'Category 5', categorySpecificList: [
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+  ]),
+  CategoricalTile(categoryName: 'Category 6', categorySpecificList: [
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
+  ]),
+];
 
 class HomeScreen extends StatefulWidget {
   static const id = "home_screen";
@@ -14,8 +70,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        //make it transparent or translucent
+        //it is transparent
         shadowColor: Colors.transparent,
         scrolledUnderElevation: 1.0,
         elevation: 0.0,
@@ -54,74 +111,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          Column(
-            children: [
-              PreviewCard(
-                previewImage: Image.asset('assets/images/handshake.png'),
-              ),
-
-              CategoricalTile(
-                categoryName: 'Category 1',
-                categorySpecificList: [
-                  PreviewCard(
-                    previewImage: Image.asset('assets/images/handshake.png'),
-                  ),
-                  PreviewCard(
-                    previewImage: Image.asset('assets/images/handshake.png'),
-                  ),
-                  PreviewCard(
-                    previewImage: Image.asset('assets/images/handshake.png'),
-                  ),
-                  PreviewCard(
-                    previewImage: Image.asset('assets/images/handshake.png'),
-                  ),
-                  PreviewCard(
-                    previewImage: Image.asset('assets/images/handshake.png'),
-                  ),
-                  PreviewCard(
-                    previewImage: Image.asset('assets/images/handshake.png'),
-                  ),
-                ],
-              ),
-              Text(
-                '1',
-                style: TextStyle(fontSize: 100.0),
-              ),
-              Text(
-                '1',
-                style: TextStyle(fontSize: 100.0),
-              ),
-              Text(
-                '1',
-                style: TextStyle(fontSize: 100.0),
-              ),
-              Text(
-                '1',
-                style: TextStyle(fontSize: 100.0),
-              ),
-              Text(
-                '1',
-                style: TextStyle(fontSize: 100.0),
-              ),
-              Text(
-                '1',
-                style: TextStyle(fontSize: 100.0),
-              ),
-              // ListView.builder(
-              //   itemCount: list.length,
-              //   //this list contains [[category, horizontal-list],[category, horizontal-list],[category, horizontal-list],...]
-
-              //   itemBuilder: (BuildContext context, int index) {
-              //     return CustomWidget(
-              //         categoryTitle: '#categroy1',
-              //         listToBeRendered: list[index].horizontal - list);
-              //   },
-              // ),
-            ],
-          ),
-        ],
+      body: ListView.builder(
+        itemBuilder: ((context, index) {
+          return listOfAllCategoricalTiles[index];
+        }),
+        itemCount: listOfAllCategoricalTiles.length,
       ),
     );
   }
