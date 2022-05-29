@@ -19,6 +19,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
   String currentString = '';
   num currentNum = 0;
   String errorToastMessage = '';
+  bool isFundButtonActive = true;
+  String donationAmountGuidelines =
+      'Guidelines for donation amount:\n\n1.Should be number only\n\n2.Should be more than 0\n\n3.Should be less than $kMaxAmountAllowed\n\nNote: Fund button won\'t be activated if guidelines are not followed';
   void openCheckout() {
     //For now options is hardcoded
     //lataer on it will take values for many parameters from actual donation requester data and donor data
@@ -130,9 +133,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
               fontSize: 18,
             )),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: Flex(
+        direction: Axis.vertical,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          Flexible(
+            child: SizedBox(
+              height: 30.0,
+            ),
+          ),
           Material(
               child: TextField(
             decoration: InputDecoration(
@@ -143,27 +153,73 @@ class _PaymentScreenState extends State<PaymentScreen> {
               currentString = typedAmount;
               print(currentString);
               try {
-                currentNum = num.parse(currentString);
-                if (currentNum >= 0 && currentNum <= kMaxAmountAllowed) {
+                currentNum = num.parse(
+                    currentString); //converting string input into number
+                if (currentNum > 0 && currentNum <= kMaxAmountAllowed) {
                   //proper input
-                  //add payment feature by watching that video
+                  isFundButtonActive = true;
+                  setState(() {});
                 } else {
                   //improper input
+                  //show toast directly or call a function which will show toast and disable payment button
+                  isFundButtonActive = false;
+                  setState(() {});
                   print('Improper Input :  $currentNum');
                 }
               } catch (e) {
+                //show toast directly or call a function which will show toast
+                isFundButtonActive = false;
+                setState(() {});
+
                 print('Error Message is given here : $e');
               }
             },
           )),
-          ActionButton(
-            buttonText: 'Fund',
-            buttonActionCallback: () {
-              openCheckout();
-            },
-            verticalPadding: 0.0,
-            horizontalPadding: 0.0,
-            buttonColor: Colors.greenAccent,
+          Flexible(
+            child: SizedBox(
+              height: 20.0,
+            ),
+          ),
+          Text(
+            donationAmountGuidelines,
+            style: TextStyle(
+              fontSize: 12.0,
+              color: Colors.grey,
+            ),
+            textAlign: TextAlign.left,
+          ),
+          Flexible(
+            child: SizedBox(
+              height: 20.0,
+            ),
+          ),
+          Text(
+            'Your donation will be used to futher the cause that matters to you ❤️',
+            style: TextStyle(
+              fontSize: 15.0,
+              color: Colors.grey,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          Flexible(
+            child: SizedBox(
+              height: 20.0,
+            ),
+          ),
+          Flexible(
+            fit: FlexFit.loose,
+            child: Center(
+              child: ActionButton(
+                buttonText: 'Fund',
+                buttonActionCallback: () {
+                  openCheckout();
+                },
+                verticalPadding: 0.0,
+                horizontalPadding: 0.0,
+                buttonColor: Colors.greenAccent,
+                isActive: isFundButtonActive,
+              ),
+            ),
           ),
         ],
       ),
