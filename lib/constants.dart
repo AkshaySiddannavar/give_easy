@@ -34,3 +34,6 @@ const kDefaultCategorySpecificListContent = [
 const int kMaxAmountAllowed = 100 * 1000;
 //maximum amount of donation allowed per transaction
 //int * int = int (dart)
+
+const String kButtonDisabledMessage =
+    'Button is disabled\nPlease Enter a Valid Amount\n1.Should be numbers only\n2.Should be more than 0\n3.Should be less than $kMaxAmountAllowed';
