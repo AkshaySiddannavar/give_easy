@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+import 'package:give_easy/constants.dart';
 
 class ActionButton extends StatelessWidget {
   final String buttonText;
@@ -6,6 +8,7 @@ class ActionButton extends StatelessWidget {
   final Color buttonColor;
   final double verticalPadding;
   final double horizontalPadding;
+  final bool isActive;
 
   const ActionButton(
       {Key? key,
@@ -13,7 +16,8 @@ class ActionButton extends StatelessWidget {
       required this.buttonActionCallback,
       this.buttonColor = Colors.amber,
       this.horizontalPadding = 25.0,
-      this.verticalPadding = 15.0})
+      this.verticalPadding = 15.0,
+      this.isActive = true})
       : super(key: key);
 
   @override
@@ -26,13 +30,28 @@ class ActionButton extends StatelessWidget {
       ),
       child: Material(
         elevation: 5.0,
-        color: buttonColor,
+        color: isActive ? buttonColor : Colors.grey,
         borderRadius: const BorderRadius.all(
           Radius.circular(50.0),
         ),
         child: MaterialButton(
           height: 45.0,
-          onPressed: buttonActionCallback,
+          onPressed: isActive
+              ? buttonActionCallback
+              : () {
+                  showToast(
+                    context: context,
+                    kButtonDisabledMessage,
+                    animation: StyledToastAnimation.scale,
+                    reverseAnimation: StyledToastAnimation.fade,
+                    position: StyledToastPosition.center,
+                    animDuration: Duration(seconds: 1),
+                    duration: Duration(seconds: 5),
+                    curve: Curves.elasticOut,
+                    reverseCurve: Curves.linear,
+                    backgroundColor: Colors.redAccent,
+                  );
+                },
           child: Text(
             buttonText,
             style: const TextStyle(
