@@ -37,3 +37,8 @@ const int kMaxAmountAllowed = 100 * 1000;
 
 const String kButtonDisabledMessage =
     'Button is disabled\nPlease Enter a Valid Amount\n1.Should be numbers only\n2.Should be more than 0\n3.Should be less than $kMaxAmountAllowed';
+
+const Widget kTaglineWidget = Text(
+    'Your donation will be used to futher the cause that matters to you ❤️', //add tagline
+    style: TextStyle(fontSize: 15.0, color: Colors.grey),
+    textAlign: TextAlign.center);
