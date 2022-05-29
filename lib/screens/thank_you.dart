@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/screens/all_screens.dart';
+import 'package:give_easy/constants.dart';
 
 class ThankYouScreen extends StatelessWidget {
   static const String id = 'thank_you_screen';
@@ -36,14 +37,7 @@ class ThankYouScreen extends StatelessWidget {
             ),
             Flexible(
               fit: FlexFit.loose,
-              child: Text(
-                'Your donation will be used to futher the cause that matters to you ❤️',
-                style: TextStyle(
-                  fontSize: 15.0,
-                  color: Colors.grey,
-                ),
-                textAlign: TextAlign.center,
-              ),
+              child: kTaglineWidget,
             ),
             ActionButton(
                 buttonText: 'Go Back To Home',

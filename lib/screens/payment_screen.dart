@@ -193,14 +193,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               height: 20.0,
             ),
           ),
-          Text(
-            'Your donation will be used to futher the cause that matters to you ❤️',
-            style: TextStyle(
-              fontSize: 15.0,
-              color: Colors.grey,
-            ),
-            textAlign: TextAlign.center,
-          ),
+          kTaglineWidget,
           Flexible(
             child: SizedBox(
               height: 20.0,
