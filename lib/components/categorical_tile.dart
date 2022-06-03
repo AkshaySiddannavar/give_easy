@@ -7,7 +7,7 @@ class CategoricalTile extends StatelessWidget {
   //in case required we can later change it to stateful
   final String categoryName;
 
-  final List<PreviewCard> categorySpecificList;
+  final List categorySpecificList;
   const CategoricalTile(
       {Key? key,
       this.categoryName = 'none',
