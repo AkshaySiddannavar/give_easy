@@ -77,9 +77,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawerEnableOpenDragGesture: false,
+      key: _key,
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(child: Text('Header')),
+            ListTile(),
+            ListTile(),
+            ListTile(),
+          ],
+        ),
+      ),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         //it is transparent
@@ -96,19 +110,22 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.black, backgroundColor: Colors.transparent),
         ),
         leading: //Profile Icon/Pic will come here
-            Container(
-          padding:
-              EdgeInsets.only(bottom: 8.0, right: 8.0, left: 5.0, top: 5.0),
-          child: CircleAvatar(
-            backgroundColor: Colors.blue,
-            radius: 70.0,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.amber,
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.elliptical(30.0, 30.0),
+            GestureDetector(
+          child: Container(
+            padding:
+                EdgeInsets.only(bottom: 8.0, right: 8.0, left: 5.0, top: 5.0),
+            child: CircleAvatar(
+              backgroundColor: Colors.blue,
+              radius: 70.0,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.elliptical(30.0, 30.0),
+              ),
             ),
           ),
+          onTap: () => _key.currentState!.openDrawer(),
         ),
         actions: //Hero animation will come here, it will be the only thing in this list
             [
