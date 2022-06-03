@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:give_easy/components/categorical_tile.dart';
+import 'package:give_easy/components/information_card.dart';
 import 'package:give_easy/components/preview_card.dart';
 import 'package:give_easy/screens/all_screens.dart';
 
@@ -8,6 +9,15 @@ import 'package:give_easy/screens/all_screens.dart';
 //works as expected with some minor UI changes which we can focus later on after app is done
 
 List<CategoricalTile> listOfAllCategoricalTiles = [
+  CategoricalTile(
+    categoryName: 'Basic Information',
+    categorySpecificList: [
+      InformationCard(),
+      InformationCard(),
+      InformationCard(),
+      InformationCard(),
+    ],
+  ),
   CategoricalTile(categoryName: 'Category 1', categorySpecificList: [
     PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
     PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
