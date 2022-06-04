@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/components/categorical_tile.dart';
 import 'package:give_easy/components/information_card.dart';
 import 'package:give_easy/components/preview_card.dart';
@@ -87,10 +88,20 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: Drawer(
         child: ListView(
           children: [
-            DrawerHeader(child: Text('Header')),
-            ListTile(),
-            ListTile(),
-            ListTile(),
+            DrawerHeader(
+                child: Text('Header')), //add profile image and user's name here
+            ListTile(title: Text('Profile'), onTap: () {}),
+            ListTile(title: Text('Your Gives'), onTap: () {}),
+            ListTile(title: Text('Create A Request'), onTap: () {}),
+            ListTile(title: Text('Current Request'), onTap: () {}),
+            ListTile(title: Text('Past Requests'), onTap: () {}),
+            SizedBox(
+              height: 80.0,
+            ),
+            ActionButton(
+              buttonText: 'Sign Out',
+              buttonActionCallback: () {},
+            )
           ],
         ),
       ),
