@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/components/categorical_tile.dart';
@@ -83,6 +84,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _auth = FirebaseAuth.instance;
   final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
 
   @override
@@ -125,7 +127,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             ActionButton(
               buttonText: 'Sign Out',
-              buttonActionCallback: () {},
+              buttonActionCallback: () {
+                _auth.signOut();
+                Navigator.popUntil(
+                    context, ModalRoute.withName('landing_screen'));
+              },
             )
           ],
         ),
