@@ -4,6 +4,11 @@ import 'package:give_easy/components/categorical_tile.dart';
 import 'package:give_easy/components/information_card.dart';
 import 'package:give_easy/components/preview_card.dart';
 import 'package:give_easy/screens/all_screens.dart';
+import 'package:give_easy/screens/create_request.dart';
+import 'package:give_easy/screens/current_request.dart';
+import 'package:give_easy/screens/past_requests.dart';
+import 'package:give_easy/screens/profile.dart';
+import 'package:give_easy/screens/your_gives.dart';
 
 //replaced ListView with a ListView.builder
 //this given list will be rendered on screen
@@ -90,11 +95,31 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             DrawerHeader(
                 child: Text('Header')), //add profile image and user's name here
-            ListTile(title: Text('Profile'), onTap: () {}),
-            ListTile(title: Text('Your Gives'), onTap: () {}),
-            ListTile(title: Text('Create A Request'), onTap: () {}),
-            ListTile(title: Text('Current Request'), onTap: () {}),
-            ListTile(title: Text('Past Requests'), onTap: () {}),
+            ListTile(
+                title: Text('Profile'),
+                onTap: () {
+                  Navigator.pushNamed(context, ProfileScreen.id);
+                }),
+            ListTile(
+                title: Text('Your Gives'),
+                onTap: () {
+                  Navigator.pushNamed(context, YourGivesScreen.id);
+                }),
+            ListTile(
+                title: Text('Create A Request'),
+                onTap: () {
+                  Navigator.pushNamed(context, CreateRequestScreen.id);
+                }),
+            ListTile(
+                title: Text('Current Request'),
+                onTap: () {
+                  Navigator.pushNamed(context, CurrentRequestScreen.id);
+                }),
+            ListTile(
+                title: Text('Past Requests'),
+                onTap: () {
+                  Navigator.pushNamed(context, PastRequestsScreen.id);
+                }),
             SizedBox(
               height: 80.0,
             ),
