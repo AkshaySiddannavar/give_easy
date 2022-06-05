@@ -6,6 +6,7 @@ import 'package:give_easy/screens/current_request.dart';
 import 'package:give_easy/screens/past_requests.dart';
 import 'package:give_easy/screens/payment_screen.dart';
 import 'package:give_easy/screens/profile.dart';
+import 'package:give_easy/screens/profile_edit.dart';
 import 'package:give_easy/screens/validation.dart';
 import 'package:give_easy/screens/your_gives.dart';
 import '../firebase_options.dart';
@@ -37,6 +38,7 @@ class GiveEasy extends StatelessWidget {
         ProfileScreen.id: (context) => ProfileScreen(),
         ValidationScreen.id: (context) => ValidationScreen(),
         YourGivesScreen.id: (context) => YourGivesScreen(),
+        ProfileEditScreen.id: (context) => ProfileEditScreen(),
         //add route to
         //becasue : - for easier debugging, for navigation
       },
