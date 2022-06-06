@@ -40,6 +40,7 @@ dependencies:
   razorpay_flutter: ^1.3.0
   flutter_styled_toast: ^2.1.3
   provider: ^6.0.3
+  firebase_storage: ^10.2.17
 
 dev_dependencies:
   flutter_test:
