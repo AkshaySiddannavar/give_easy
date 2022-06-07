@@ -41,6 +41,7 @@ dependencies:
   flutter_styled_toast: ^2.1.3
   provider: ^6.0.3
   firebase_storage: ^10.2.17
+  path_provider: ^2.0.11
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +65,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/images/handshake.png
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
