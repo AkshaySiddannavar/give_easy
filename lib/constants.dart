@@ -42,3 +42,13 @@ const Widget kTaglineWidget = Text(
     'Your donation will be used to futher the cause that matters to you ❤️', //add tagline
     style: TextStyle(fontSize: 15.0, color: Colors.grey),
     textAlign: TextAlign.center);
+
+const kAllowedExtensionsForPreviewImage = [
+  'jpg',
+  'jpeg',
+  'png',
+  'cr2',
+  'crw',
+  'nef',
+  'svg'
+];
