@@ -47,8 +47,8 @@ const kAllowedExtensionsForPreviewImage = [
   'jpg',
   'jpeg',
   'png',
-  'cr2',
-  'crw',
-  'nef',
+  'cr2', //raw image format created directly by camera
+  'crw', //raw image format created directly by camera
+  'nef', //raw image format created directly by camera
   'svg'
 ];
