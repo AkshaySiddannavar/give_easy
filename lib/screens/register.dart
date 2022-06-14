@@ -22,14 +22,6 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
   String? selectedGender;
 
   @override
-  void initState() {
-    super.initState();
-  } //remove in a commit
-
-  /*
-  TODO commit after adding all new fields
-  */
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
