@@ -18,12 +18,17 @@ class RegisterationScreen extends StatefulWidget {
 class _RegisterationScreenState extends State<RegisterationScreen> {
   final FirebaseAuth _auth = FirebaseAuth
       .instance; //The entry point of the Firebase Authentication SDK
-  late String email, password;
+  late String email, password, userName, phoneNumber;
+  String? selectedGender;
+
   @override
   void initState() {
     super.initState();
-  }
+  } //remove in a commit
 
+  /*
+  TODO commit after adding all new fields
+  */
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +51,106 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                   height: 30.0,
                 ),
                 Expanded(
+                  //TODO add some grey text saying that given name will be used a display name and also used in records of donations made by you
+                  //TODO add some grey text saying prefer using your actual name
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 3.0),
+                    child: InputTextField(
+                      type: TextInputType.name,
+                      hintMessage: 'Enter User Name',
+                      isSensitive: false,
+                      currentTextCallback: (value) {
+                        //update User Name
+                        userName = value;
+                      },
+                    ),
+                  ),
+                ),
+                Text(
+                  'Select Your Gender',
+                  textAlign: TextAlign.center,
+                ),
+                Row(
+                  children: [
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: RadioListTile(
+                          dense: true,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 5.0, vertical: 0.0),
+                          visualDensity: VisualDensity.compact,
+                          title: Text(
+                            'Male',
+                            style: TextStyle(fontSize: 15.0),
+                          ),
+                          value: 'Male',
+                          groupValue: selectedGender,
+                          onChanged: (maleSelected) {
+                            selectedGender = maleSelected.toString();
+                            print(maleSelected);
+                            setState(() {});
+                          }),
+                    ),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: RadioListTile(
+                          dense: true,
+                          contentPadding: EdgeInsets.symmetric(horizontal: 5.0),
+                          visualDensity: VisualDensity.compact,
+                          title: Text(
+                            'Female',
+                            style: TextStyle(fontSize: 15.0),
+                          ),
+                          value: 'Female',
+                          groupValue: selectedGender,
+                          onChanged: (femaleSelected) {
+                            selectedGender = femaleSelected.toString();
+                            print(femaleSelected);
+                            setState(() {});
+                          }),
+                    ),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: RadioListTile(
+                          dense: true,
+                          contentPadding: EdgeInsets.symmetric(horizontal: 5.0),
+                          visualDensity: VisualDensity.compact,
+                          title: Text(
+                            'Other',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          value: 'Other',
+                          groupValue: selectedGender,
+                          onChanged: (otherSelected) {
+                            selectedGender = otherSelected.toString();
+                            print(otherSelected);
+                            setState(() {});
+                          }),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5.0,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 3.0),
+                    child: InputTextField(
+                      type: TextInputType.phone,
+                      hintMessage: 'Enter Phone Number',
+                      isSensitive: false,
+                      currentTextCallback: (value) {
+                        phoneNumber = value;
+                      },
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 3.0),
                     child: InputTextField(
                       type: TextInputType.emailAddress,
                       hintMessage: 'Enter Email',
@@ -59,12 +162,10 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 5.0,
-                ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 3.0),
                     child: InputTextField(
                       hintMessage: 'Enter Password',
                       isSensitive: true,
@@ -79,12 +180,21 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                   height: 10.0,
                 ),
                 ActionButton(
+                  verticalPadding: 10.0,
+                  horizontalPadding: 20.0,
                   buttonText: 'Register',
                   buttonActionCallback: () async {
                     try {
+                      // ignore: unused_local_variable
                       var currentUserCredentials =
                           await _auth.createUserWithEmailAndPassword(
                               email: email, password: password);
+
+                      /*
+                      If the new account was created successfully, the user is also signed in. 
+                      If you are listening to changes in authentication state, a new event will be sent to your listeners.
+                      source: https://firebase.flutter.dev/docs/auth/password-auth
+                      */
 
                       Navigator.pushNamed(context, HomeScreen.id);
                     } catch (e) {
