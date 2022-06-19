@@ -7,6 +7,11 @@ import 'package:give_easy/screens/new_category_reuest.dart';
 import 'package:give_easy/screens/past_requests.dart';
 import 'package:give_easy/screens/payment_screen.dart';
 import 'package:give_easy/screens/profile.dart';
+import 'package:give_easy/screens/profile_edit_screens/email_edit.dart';
+import 'package:give_easy/screens/profile_edit_screens/gender_edit.dart';
+import 'package:give_easy/screens/profile_edit_screens/organization_edit.dart';
+import 'package:give_easy/screens/profile_edit_screens/phone_number_edit.dart';
+import 'package:give_easy/screens/profile_edit_screens/username_edit.dart';
 import 'package:give_easy/screens/request_creation_success.dart';
 import 'package:give_easy/screens/validation.dart';
 import 'package:give_easy/screens/your_gives.dart';
@@ -42,7 +47,11 @@ class GiveEasy extends StatelessWidget {
         NewCategoryRequestScreen.id: (context) => NewCategoryRequestScreen(),
         RequestCreationSuccessScreen.id: (context) =>
             RequestCreationSuccessScreen(),
-
+        EmailEditScreen.id: (context) => EmailEditScreen(),
+        GenderEditScreen.id: (context) => GenderEditScreen(),
+        OrganizationEditScreen.id: (context) => OrganizationEditScreen(),
+        PhoneNumberEditScreen.id: (context) => PhoneNumberEditScreen(),
+        UsernameEditScreen.id: (context) => UsernameEditScreen(),
         //add route to
         //becasue : - for easier debugging, for navigation
       },
