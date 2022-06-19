@@ -7,7 +7,6 @@ import 'package:give_easy/screens/new_category_reuest.dart';
 import 'package:give_easy/screens/past_requests.dart';
 import 'package:give_easy/screens/payment_screen.dart';
 import 'package:give_easy/screens/profile.dart';
-import 'package:give_easy/screens/profile_edit.dart';
 import 'package:give_easy/screens/request_creation_success.dart';
 import 'package:give_easy/screens/validation.dart';
 import 'package:give_easy/screens/your_gives.dart';
@@ -40,7 +39,6 @@ class GiveEasy extends StatelessWidget {
         ProfileScreen.id: (context) => ProfileScreen(),
         ValidationScreen.id: (context) => ValidationScreen(),
         YourGivesScreen.id: (context) => YourGivesScreen(),
-        ProfileEditScreen.id: (context) => ProfileEditScreen(),
         NewCategoryRequestScreen.id: (context) => NewCategoryRequestScreen(),
         RequestCreationSuccessScreen.id: (context) =>
             RequestCreationSuccessScreen(),
