@@ -8,6 +8,7 @@ class InputTextField extends StatefulWidget {
   final void Function(String)? currentTextCallback;
   final String? defaultText;
   final String? textFieldLabel;
+  final bool isReadOnly;
   const InputTextField(
       {Key? key,
       required this.hintMessage,
@@ -15,7 +16,8 @@ class InputTextField extends StatefulWidget {
       required this.currentTextCallback,
       this.type = TextInputType.text,
       this.defaultText,
-      this.textFieldLabel})
+      this.textFieldLabel,
+      this.isReadOnly = false})
       : super(key: key);
 
   @override
@@ -36,6 +38,7 @@ class _InputTextFieldState extends State<InputTextField> {
         onChanged: widget.currentTextCallback,
         obscureText: widget.isSensitive,
         textAlign: TextAlign.center,
+        readOnly: widget.isReadOnly,
         decoration: kInputTextFieldDecoration.copyWith(
             hintText: widget.hintMessage,
             labelText: widget.textFieldLabel)); //make it optional and specific
