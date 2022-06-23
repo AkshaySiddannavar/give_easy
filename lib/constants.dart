@@ -52,3 +52,12 @@ const kAllowedExtensionsForPreviewImage = [
   'nef', //raw image format created directly by camera
   'svg'
 ];
+
+const Map<String, dynamic> kDefaultUserData = {
+  "gender": 'NO DATA',
+  "organizationName": 'NO DATA',
+  "phoneNumber": 'NO DATA',
+  "userEmail": 'NO DATA',
+  "userName": 'NO DATA',
+  "uniqueID": 'NO DATA',
+};
