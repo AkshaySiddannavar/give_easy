@@ -69,6 +69,8 @@ class _ValidationScreenState extends State<ValidationScreen> {
             progress = (100.0 *
                     (taskSnapshot.bytesTransferred / taskSnapshot.totalBytes))
                 .roundToDouble();
+            //TODO: optimize setState calling later on
+            //when optimizing setState call it only after progress has changed for a decent value
             print("Upload is $progress% complete.");
             setState(() {});
             break;
@@ -94,7 +96,8 @@ class _ValidationScreenState extends State<ValidationScreen> {
     }
   }
 
-  //add exception handling
+  //TODO: add exception handling(later)
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,6 +114,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
                   decoration: kInputTextFieldDecoration,
                   onChanged: (value) {
                     if (value.isNotEmpty) {
+                      setState(() {});
                       currentString = value;
                     }
                   },
