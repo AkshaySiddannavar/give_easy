@@ -43,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   //How can one be dependent on other when we're not even sure of it being created
 
   void renderUserImageInitials() {
-    username = Provider.of<userData>(context)
+    username = Provider.of<UserData>(context)
         .profileData["userName"]
         .toString(); //re-initializing username to actual value
 
@@ -73,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SizedBox(
             height: 5.0,
           ),
-          Consumer<userData>(
+          Consumer<UserData>(
             builder: (context, value, child) => Expanded(
               child: CircleAvatar(
                 //profile picture(later if time permits) or initials
@@ -104,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Navigator.pushNamed(context, UsernameEditScreen.id);
                 }),
           ),
-          Consumer<userData>(
+          Consumer<UserData>(
             builder: (context, value, child) => Expanded(
               child: ProfileElementTile(
                   profileElementName: 'Gender',
@@ -115,7 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
 
-          Consumer<userData>(
+          Consumer<UserData>(
             builder: (context, value, child) => Expanded(
               child: ProfileElementTile(
                   profileElementName: 'Organization\nName',
@@ -125,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }),
             ),
           ),
-          Consumer<userData>(
+          Consumer<UserData>(
             builder: (context, value, child) => Expanded(
               child: ProfileElementTile(
                   profileElementName: 'Your Email',
@@ -135,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }),
             ),
           ),
-          Consumer<userData>(
+          Consumer<UserData>(
             builder: (context, value, child) => Expanded(
               child: ProfileElementTile(
                   profileElementName: 'Phone\nNumber',

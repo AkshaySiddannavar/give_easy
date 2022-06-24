@@ -32,8 +32,8 @@ class GiveEasy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<userData>(
-      create: (_) => userData(),
+    return ChangeNotifierProvider<UserData>(
+      create: (_) => UserData(),
       lazy: false,
       child: MaterialApp(
         initialRoute: LandingScreen.id,

@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   late String email, password;
   @override
   Widget build(BuildContext context) {
-    return Consumer<userData>(
+    return Consumer<UserData>(
       builder: (context, userDataObject, child) => Scaffold(
         body: SafeArea(
           child: Center(

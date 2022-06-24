@@ -38,7 +38,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
   //TODO: add constraints on fields(later)
   @override
   Widget build(BuildContext context) {
-    return Consumer<userData>(
+    return Consumer<UserData>(
       builder: (context, userDataObject, child) => Scaffold(
         body: SafeArea(
           child: Center(

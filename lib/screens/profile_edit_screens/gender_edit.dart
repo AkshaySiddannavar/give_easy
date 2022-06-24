@@ -17,7 +17,7 @@ class _GenderEditScreenState extends State<GenderEditScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Consumer<userData>(
+      child: Consumer<UserData>(
         builder: (context, userDataObject, child) {
           return Scaffold(
             appBar: AppBar(
