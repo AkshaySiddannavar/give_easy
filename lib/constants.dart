@@ -61,3 +61,15 @@ const Map<String, dynamic> kDefaultUserData = {
   "userName": 'NO DATA',
   "uniqueID": 'NO DATA',
 };
+
+const Map<String, dynamic> kDefaultRequestData = {
+  "category": 'NO DATA',
+  "collectedAmount": -1,
+  "creator": 'NO DATA',
+  "description": 'NO DATA',
+  "goalAmount": -1,
+  "organizationName": 'NO DATA',
+  "previewImageRef": 'NO DATA',
+  "status": 'NO DATA',
+  "title": 'NO DATA',
+};
