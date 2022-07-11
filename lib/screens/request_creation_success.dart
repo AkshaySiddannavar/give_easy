@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:confetti/confetti.dart';
 import 'dart:math';
 
+import 'package:give_easy/components/action_button.dart';
+import 'package:give_easy/screens/all_screens.dart';
+
 class RequestCreationSuccessScreen extends StatefulWidget {
   static const String id = 'request_creation_success_screen';
   const RequestCreationSuccessScreen({Key? key}) : super(key: key);
@@ -82,6 +85,10 @@ class _RequestCreationSuccessScreenState
           numberOfParticles: 4,
         ),
       ),
+      ActionButton(
+          buttonText: 'Yay!',
+          buttonActionCallback: () =>
+              Navigator.pushReplacementNamed(context, HomeScreen.id)),
     ]);
   }
 

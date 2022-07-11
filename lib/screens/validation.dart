@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:give_easy/constants.dart';
 import 'package:give_easy/screens/create_request.dart';
+import 'package:give_easy/screens/request_creation_success.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,8 +14,9 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class ValidationScreen extends StatefulWidget {
   static const String id = 'validation_screen';
-
-  ValidationScreen({Key? key}) : super(key: key);
+  Map<String, dynamic> newRequestData;
+  ValidationScreen({Key? key, this.newRequestData = kDefaultRequestData})
+      : super(key: key);
 
   @override
   State<ValidationScreen> createState() => _ValidationScreenState();
@@ -20,10 +24,18 @@ class ValidationScreen extends StatefulWidget {
 
 class _ValidationScreenState extends State<ValidationScreen> {
   File file = File('');
-  final storage = FirebaseStorage.instance;
-  final storageRef = FirebaseStorage.instance.ref();
+  static final _auth = FirebaseAuth.instance;
+  static final storage = FirebaseStorage.instance;
+  static final storageRef = FirebaseStorage.instance.ref();
+  // ignore: prefer_typing_uninitialized_variables
+  late final fileDownloadURL;
+  bool downloadURLReady = false;
+  //For now this way will work to directly store downloadURL
+  //Though in future if you want to retreive data then you will have to also store file name along with downloadURL for fetching a new downloadURL
+  //(later)
+
   double progress = 0;
-  String currentString = '';
+  String organizationName = '';
 
   void selectFile() async {
     FilePickerResult? result =
@@ -45,8 +57,15 @@ class _ValidationScreenState extends State<ValidationScreen> {
     if (file == null) {
       print('*************************\nfile is null\n********************');
     } else {
-      final fileName = p.basename(file.path);
-      final destinationRef = storageRef.child('uploads/${fileName}');
+      final fileBaseName = p.basename(file.path); //just file's name
+
+      var currentDateTime = DateTime.now().toString();
+
+      final fileUploadName =
+          '${_auth.currentUser!.uid}___$currentDateTime'; // file will be uploaded with this name
+
+      final destinationRef =
+          storageRef.child('organization_proofs/$fileUploadName');
 
       showToast(
         'Uploading...\nPlease wait till 100% file is uploaded',
@@ -61,9 +80,10 @@ class _ValidationScreenState extends State<ValidationScreen> {
         backgroundColor: Colors.grey,
       );
 
-      final uploadTask = destinationRef.putFile(file);
+      final uploadTask = destinationRef
+          .putFile(file); //starting the task of uploading the file
 
-      uploadTask.snapshotEvents.listen((TaskSnapshot taskSnapshot) {
+      uploadTask.snapshotEvents.listen((TaskSnapshot taskSnapshot) async {
         switch (taskSnapshot.state) {
           case TaskState.running:
             progress = (100.0 *
@@ -81,21 +101,46 @@ class _ValidationScreenState extends State<ValidationScreen> {
             print("Upload was canceled");
             break;
           case TaskState.error:
-            // Handle unsuccessful uploads
+            print('_ _ _ _ _ ___ _ _ _ _ \nERROR ERROR\n__ _ __ _ _');
             break;
           case TaskState.success:
-            // Handle successful uploads on complete
-            // ...
+            print('**************88');
+            fileDownloadURL = await destinationRef.getDownloadURL();
+            downloadURLReady = true;
+            setState(() {});
+
             break;
         }
       });
-
-      if (uploadTask.snapshot.state == TaskState.success) {
-        var downloadURL = await destinationRef.getDownloadURL();
-      }
     }
   }
 
+  void setNewRequestMap() {
+    String category = widget.newRequestData["category"];
+    String description = widget.newRequestData["description"];
+    double goalAmount = widget.newRequestData["goalAmount"];
+    String previewImageRef = widget.newRequestData["previewImageRef"];
+    String title = widget.newRequestData["title"];
+
+    widget.newRequestData = {
+      "category": category, //added in create req screen [1.]
+      "collectedAmount": -1,
+      "creator": _auth.currentUser!.uid, //Added in validationscreen [1.]
+      "description": description, //added in create req screen [2.]
+      "goalAmount": goalAmount, //added in create req screen [3.]
+      "organizationName": organizationName, //Added in validationscreen [2.]
+      "previewImageRef":
+          previewImageRef, //added in create req screen(change later) //later on code it such that preview image is uploaded after validation is performed [4.]
+      "status": 'active', //Added in validationscreen [3.]
+      "title": title, //added in create req screen [5.]
+    };
+  }
+
+  void uploadRequestData() {
+    final _firestore = FirebaseFirestore.instance;
+
+    _firestore.collection('specific-request-data').add(widget.newRequestData);
+  }
   //TODO: add exception handling(later)
 
   @override
@@ -115,7 +160,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
                   onChanged: (value) {
                     if (value.isNotEmpty) {
                       setState(() {});
-                      currentString = value;
+                      organizationName = value;
                     }
                   },
                 ),
@@ -141,9 +186,17 @@ class _ValidationScreenState extends State<ValidationScreen> {
           ActionButton(
             buttonText: 'Create Request',
             buttonActionCallback: () {
-              Navigator.pushNamed(context, CreateRequestScreen.id);
+              setNewRequestMap();
+              uploadRequestData(); //upload data into firestore
+
+              print(
+                  '*************************\n$fileDownloadURL\n*****************');
+
+              Navigator.pushNamed(context, RequestCreationSuccessScreen.id);
             },
-            isActive: ((progress == 100.0) && (currentString.isNotEmpty))
+            isActive: ((progress == 100.0) &&
+                    (organizationName.isNotEmpty) &&
+                    downloadURLReady)
                 ? true
                 : false,
           )
