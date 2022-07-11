@@ -63,13 +63,14 @@ const Map<String, dynamic> kDefaultUserData = {
 };
 
 const Map<String, dynamic> kDefaultRequestData = {
-  "category": 'NO DATA',
+  "category": 'NO DATA', //added in create req screen [1.]
   "collectedAmount": -1,
-  "creator": 'NO DATA',
-  "description": 'NO DATA',
-  "goalAmount": -1,
-  "organizationName": 'NO DATA',
-  "previewImageRef": 'NO DATA',
-  "status": 'NO DATA',
-  "title": 'NO DATA',
+  "creator": 'NO DATA', //Added in validationscreen [1.]
+  "description": 'NO DATA', //added in create req screen [2.]
+  "goalAmount": -1, //added in create req screen [3.]
+  "organizationName": 'NO DATA', //Added in validationscreen [2.]
+  "previewImageRef":
+      'NO DATA', //added in create req screen(change later) //later on code it such that preview image is uploaded after validation is performed [4.]
+  "status": 'NO DATA', //Added in validationscreen [3.]
+  "title": 'NO DATA', //added in create req screen [5.]
 };
