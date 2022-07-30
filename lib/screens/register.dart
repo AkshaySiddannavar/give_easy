@@ -208,8 +208,12 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                         */
 
                         newUserData["uniqueID"] = newUserCredentials.user!.uid;
-                        //TODO make button inactive till user hasn't selected gender (later)
 
+                        newUserCredentials.user!
+                            .updateDisplayName(newUserData["userName"]);
+                        //updating username in firebase authentication
+                        //TODO make button inactive till user hasn't selected gender (later)
+                        //TODO: register new user and check payments then
                         if (!mounted) {
                           //This will run when there's a problem in build context
                           //Problem - Mounted - False
