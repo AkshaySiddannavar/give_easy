@@ -1,51 +1,68 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/constants.dart';
 import 'package:give_easy/screens/all_screens.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+import 'package:give_easy/user_data/user_data_firestore_api.dart';
 
 class PaymentScreen extends StatefulWidget {
   static const String id = "payment_screen";
-  final int amount = 0;
-  const PaymentScreen({Key? key}) : super(key: key);
+  final String organizationName;
+  final String donationDescriptionShort;
+
+  const PaymentScreen(
+      {Key? key,
+      this.organizationName = 'NO ORGANITAITON',
+      this.donationDescriptionShort = 'NO DESCRIPTIONS'})
+      : super(key: key);
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  final Razorpay _razorpay = Razorpay();
-  String currentString = '';
-  num currentNum = 0;
-  String errorToastMessage = '';
+  final _currentUser = FirebaseAuth.instance.currentUser;
+
+  final Razorpay _razorpay = Razorpay(); //Object to interact with Razorpay API
+
   bool isFundButtonActive = true;
+  String errorToastMessage = '';
   String donationAmountGuidelines =
       'Guidelines for donation amount:\n\n1.Should be number only\n\n2.Should be more than 0\n\n3.Should be less than $kMaxAmountAllowed\n\nNote: Fund button won\'t be activated if guidelines are not followed';
-  void openCheckout() {
-    //For now options is hardcoded
-    //lataer on it will take values for many parameters from actual donation requester data and donor data
+
+  String currentString = '';
+  num currentNum = 0;
+
+  void openCheckout() async {
     var options = {
       'key': 'rzp_test_zESrJgJgccb3qt', //key ID
       'amount': currentNum * 100,
       //RazorPay deals with paise
       //If user entered 3 it is '3 paise' for razor pay
       //Hence we need to multiply by 100 to get rupee equivalent
-      'name': 'Unknown NGO', //name of receiver
-      'description': 'Donation to some cause',
+
+      'name': widget
+          .organizationName, //name of NGO, organization of creation of donation
+
+      'description': widget.donationDescriptionShort, //donation description
       'currency': 'INR',
       'wallet': 'paytm',
-      'prefill': {
-        'contact': '8888888888',
-        'email': 'sample@sample.com',
-      }
-      //done - all parameters : https://razorpay.com/docs/payments/payment-gateway/flutter-integration/standard/build-integration/#17-add-checkout-options
 
-      //done - see what all parameters are useful to you
-      //done - use those paremeters
+      'prefill': {
+        'contact': await UserDataFirestoreAPI.getUserPhoneNumber(
+            _currentUser!.uid), //get contact of user
+        'email': _currentUser!.email.toString(), //get email of user
+      }
+      //all parameters : https://razorpay.com/docs/payments/payment-gateway/flutter-integration/standard/build-integration/#17-add-checkout-options
+      //see what all parameters are useful to you
+      //use those paremeters
     };
 
     _razorpay.open(options);
+    //Opens the Razorpay checkout window with details given by us
+    //further payment is handled by razor pay
   }
 
   @override
@@ -55,10 +72,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   }
-
-  //done - understand PaymentSuccessResponse object so that you can use its parameters properly
-  //done - understand PaymentFailureResponse object so that you can use its parameters properly
-  //done - understand ExternalWalletResponse object so that you can use its parameters properly
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     //Do something when payment succeeds, show a widget of confirmation and/or re-direct to Thank You screen
