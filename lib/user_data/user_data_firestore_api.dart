@@ -35,6 +35,20 @@ class UserDataFirestoreAPI {
     _firestore.collection('user-data').doc().set(userData);
   }
 
+  static Future<String> getUserPhoneNumber(String userUID) async {
+    QuerySnapshot<Map<String, dynamic>> resultOfQuery = await _firestore
+        .collection('user-data')
+        .where("uniqueID", isEqualTo: userUID)
+        .get()
+        .then((value) => value,
+            onError: (e) =>
+                print('Error in getting user with given UID $userUID'));
+
+    var userData = resultOfQuery.docs.first.data();
+
+    return userData["phoneNumber"];
+  }
+
   //Read user's data from firestore user-data collection
   static Future<Map<String, dynamic>> readDBUserData() async {
     var uid = FirebaseAuth.instance.currentUser!.uid;
