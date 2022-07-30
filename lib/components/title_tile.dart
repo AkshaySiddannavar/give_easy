@@ -4,10 +4,12 @@ import 'package:give_easy/constants.dart';
 class TitleTile extends StatelessWidget {
   final String title;
   final Image backgroundImage;
+  final String organizationName;
   const TitleTile(
       {Key? key,
       this.title = 'default title',
-      this.backgroundImage = kDefaultPreviewImage})
+      this.backgroundImage = kDefaultPreviewImage,
+      this.organizationName = 'default organization'})
       : super(key: key);
 
   @override
@@ -20,16 +22,32 @@ class TitleTile extends StatelessWidget {
         color: Colors.pinkAccent,
         //color is just for facilitating debugging change later
       ),
-      child: Align(
-        alignment: Alignment.bottomLeft,
-        child: Text(
-          title,
-          style: TextStyle(
-            backgroundColor: Colors.white54,
-            //color is just for facilitating debugging change later
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              title,
+              style: TextStyle(
+                backgroundColor: Colors.white54,
+                //color is just for facilitating debugging change later
+              ),
+            ),
           ),
-        ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Text(
+              "By $organizationName",
+              style: TextStyle(
+                backgroundColor: Colors.white54,
+                //color is just for facilitating debugging change later
+              ),
+            ),
+          ),
+        ],
       ),
+      //Add a tile for organization name as "~By OrgName" will need to test UI
     );
   }
 }
