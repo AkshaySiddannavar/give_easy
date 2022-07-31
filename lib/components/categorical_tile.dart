@@ -1,18 +1,77 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:give_easy/components/preview_card.dart';
 import 'package:give_easy/constants.dart';
 
-class CategoricalTile extends StatelessWidget {
-  //we will keep it stateless since ListView is also stateless
-  //in case required we can later change it to stateful
+class CategoricalTile extends StatefulWidget {
   final String categoryName;
 
   final List categorySpecificList;
+
+  final bool fetchListFromFirestore;
+
   const CategoricalTile(
       {Key? key,
       this.categoryName = 'none',
+      this.fetchListFromFirestore = false,
       this.categorySpecificList = kDefaultCategorySpecificListContent})
       : super(key: key);
+
+  static final _firestore = FirebaseFirestore.instance;
+
+  @override
+  State<CategoricalTile> createState() => _CategoricalTileState();
+}
+
+class _CategoricalTileState extends State<CategoricalTile> {
+  Widget listOfFuturePreviewCards = Container();
+
+  Future<List> getPreviewCardDataFromFirestore(String categoryName) async {
+    //categoryName -(this function)> listOfpreviewCards to be rendered or list of data to be stored in those preview cards
+
+    final requestCollectionRef =
+        CategoricalTile._firestore.collection('specific-request-data');
+
+    final getAllRequestsOfACategory = await requestCollectionRef
+        .where("category", isEqualTo: categoryName)
+        .get()
+        .then((value) => value,
+            onError: (e) => print("************\n$e\n***********"));
+
+    List allDocumentsOfACategory = getAllRequestsOfACategory.docs;
+    //Now, we have all data required to render PreviewCards on screen
+
+    return allDocumentsOfACategory;
+  }
+
+  Future<Widget> listViewBuilderForACategory(String categoryName) async {
+    List listOfDataInPreviewcard =
+        await getPreviewCardDataFromFirestore(categoryName);
+
+    listOfFuturePreviewCards = ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        var data = listOfDataInPreviewcard[index];
+        String title = data["title"];
+        String previewImageRef = data["previewImageRef"];
+
+        Image previewImage = Image.network(previewImageRef);
+        print('title is title $title');
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: PreviewCard(
+            title: title,
+            previewImage: previewImage,
+          ),
+        );
+      },
+      itemCount: listOfDataInPreviewcard.length,
+      shrinkWrap: true,
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
+    );
+
+    return listOfFuturePreviewCards;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +90,7 @@ class CategoricalTile extends StatelessWidget {
             color: Colors.orangeAccent,
 
             child: Text(
-              categoryName,
+              widget.categoryName,
               textAlign: TextAlign.left,
             ),
           ),
@@ -41,21 +100,38 @@ class CategoricalTile extends StatelessWidget {
           Expanded(
             child: SizedBox(
               height: 100.0,
-              child: ListView.builder(
-                itemBuilder: ((context, index) {
-                  return Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: categorySpecificList[index],
-                    ),
-                  );
-                }),
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
-                shrinkWrap: true,
-                itemCount: categorySpecificList.length,
-              ),
+              child: (widget.fetchListFromFirestore)
+                  ? FutureBuilder(
+                      future: listViewBuilderForACategory(widget.categoryName),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        } else if (snapshot.hasError) {
+                          return Center(child: Text('error'));
+                        } else {
+                          return Align(
+                            alignment: Alignment.center,
+                            child: listOfFuturePreviewCards,
+                          );
+                        }
+                      }) //when we will be using firestore
+                  : ListView.builder(
+                      itemBuilder: ((context, index) {
+                        return Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: widget.categorySpecificList[index],
+                            //only this part will change depending on whether we manually enter the list or we dynamically fetch the list of PreviewCards
+                          ),
+                        );
+                      }),
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                      shrinkWrap: true,
+                      itemCount: widget.categorySpecificList.length,
+                    ), //when we won't be using firestore
             ),
           ),
         ],
