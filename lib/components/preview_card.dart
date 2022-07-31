@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:give_easy/constants.dart';
 import 'package:give_easy/screens/all_screens.dart';
 
+//onTap : Navigator.push(context, SpecificDonationScreen(title));
+//SpecificDonationScreen will be rendered using firestore by using title as unique identifier
+
 class PreviewCard extends StatelessWidget {
   final Image previewImage; //image shown in PreviewCard
-  final String title; //title from specific-request-data
+  final String
+      title; //title from specific-request-data through categorical-tile
 
   const PreviewCard(
       {Key? key,
@@ -14,9 +18,15 @@ class PreviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('\n\npreview card ran\n\n');
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, SpecificDonationScreen.id);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SpecificDonationScreen(
+                      donationTitle: title,
+                    )));
       },
       child: Column(
         children: [
