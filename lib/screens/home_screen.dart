@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:give_easy/components/action_button.dart';
@@ -9,11 +10,17 @@ import 'package:give_easy/screens/create_request.dart';
 import 'package:give_easy/screens/current_request.dart';
 import 'package:give_easy/screens/past_requests.dart';
 import 'package:give_easy/screens/profile.dart';
+import 'package:give_easy/screens/validation.dart';
 import 'package:give_easy/screens/your_gives.dart';
+import 'package:give_easy/user_data/user_data_change_notifier.dart';
+import 'package:provider/provider.dart';
 
 //replaced ListView with a ListView.builder
 //this given list will be rendered on screen
 //works as expected with some minor UI changes which we can focus later on after app is done
+
+//TODO: add contents into information card
+//use firestore to load all preview cards(with their previewImages and title)
 
 List<CategoricalTile> listOfAllCategoricalTiles = [
   CategoricalTile(
@@ -25,6 +32,14 @@ List<CategoricalTile> listOfAllCategoricalTiles = [
       InformationCard(),
     ],
   ),
+  CategoricalTile(categoryName: 'Clothe Aid', fetchListFromFirestore: true),
+  CategoricalTile(
+      categoryName: 'Disaster Relief Aid', fetchListFromFirestore: true),
+  CategoricalTile(categoryName: 'Food Aid', fetchListFromFirestore: true),
+  CategoricalTile(
+      categoryName: 'Homeless people Aid', fetchListFromFirestore: true),
+  CategoricalTile(categoryName: 'War Relief Aid', fetchListFromFirestore: true),
+  CategoricalTile(categoryName: 'Water Aid', fetchListFromFirestore: true),
   CategoricalTile(categoryName: 'Category 1', categorySpecificList: [
     PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
     PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
@@ -33,47 +48,32 @@ List<CategoricalTile> listOfAllCategoricalTiles = [
     PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
     PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
   ]),
-  CategoricalTile(categoryName: 'Category 2', categorySpecificList: [
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-  ]),
-  CategoricalTile(categoryName: 'Category 3', categorySpecificList: [
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-  ]),
-  CategoricalTile(categoryName: 'Category 4', categorySpecificList: [
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-  ]),
-  CategoricalTile(categoryName: 'Category 5', categorySpecificList: [
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-  ]),
-  CategoricalTile(categoryName: 'Category 6', categorySpecificList: [
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-  ]),
 ];
+
+final _firestore = FirebaseFirestore.instance;
+
+void getCategories() async {
+  //gets a list of categories
+
+  CollectionReference<Map<String, dynamic>> allCategoryDocuments =
+      _firestore.collection("category-name");
+
+  QuerySnapshot getAllCategoryDocuments = await allCategoryDocuments
+      .get()
+      .then((value) => value, onError: (e) => print(e));
+
+  List listOfAllCategories =
+      getAllCategoryDocuments.docs; //List of query snapshots
+
+  // for (var snapshot in getAllCategoryDocuments.docs) {
+  //   var id = snapshot.id;
+  //   if (id == 'dummy') continue;
+
+  //   print(id);
+  // }
+
+  // print(listOfAllCategories);
+}
 
 class HomeScreen extends StatefulWidget {
   static const id = "home_screen";
@@ -89,103 +89,105 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawerEnableOpenDragGesture: false,
-      key: _key,
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-                child: Text('Header')), //add profile image and user's name here
-            ListTile(
-                title: Text('Profile'),
-                onTap: () {
-                  Navigator.pushNamed(context, ProfileScreen.id);
-                }),
-            ListTile(
-                title: Text('Your Gives'),
-                onTap: () {
-                  Navigator.pushNamed(context, YourGivesScreen.id);
-                }),
-            ListTile(
-                title: Text('Create A Request'),
-                onTap: () {
-                  Navigator.pushNamed(context, CreateRequestScreen.id);
-                }),
-            ListTile(
-                title: Text('Current Request'),
-                onTap: () {
-                  Navigator.pushNamed(context, CurrentRequestScreen.id);
-                }),
-            ListTile(
-                title: Text('Past Requests'),
-                onTap: () {
-                  Navigator.pushNamed(context, PastRequestsScreen.id);
-                }),
-            SizedBox(
-              height: 80.0,
+    return Consumer<UserData>(
+      builder: (context, userDataObject, child) => Scaffold(
+          drawerEnableOpenDragGesture: false,
+          key: _key,
+          drawer: Drawer(
+            child: ListView(
+              children: [
+                DrawerHeader(
+                    child: Text(
+                        'Header')), //add profile image and user's name here
+                ListTile(
+                    title: Text('Profile'),
+                    onTap: () {
+                      Navigator.pushNamed(context, ProfileScreen.id);
+                    }),
+                ListTile(
+                    title: Text('Your Gives'),
+                    onTap: () {
+                      Navigator.pushNamed(context, YourGivesScreen.id);
+                    }),
+                ListTile(
+                    title: Text('Create A Request'),
+                    onTap: () {
+                      Navigator.pushNamed(context, CreateRequestScreen.id);
+                    }),
+                ListTile(
+                    title: Text('Current Request'),
+                    onTap: () {
+                      Navigator.pushNamed(context, CurrentRequestScreen.id);
+                    }),
+                ListTile(
+                    title: Text('Past Requests'),
+                    onTap: () {
+                      Navigator.pushNamed(context, PastRequestsScreen.id);
+                    }),
+                SizedBox(
+                  height: 80.0,
+                ),
+                ActionButton(
+                  buttonText: 'Sign Out',
+                  buttonActionCallback: () {
+                    _auth.signOut();
+
+                    Navigator.pushReplacementNamed(context, LandingScreen.id);
+                  },
+                )
+              ],
             ),
-            ActionButton(
-              buttonText: 'Sign Out',
-              buttonActionCallback: () {
-                _auth.signOut();
-                Navigator.popUntil(
-                    context, ModalRoute.withName('landing_screen'));
-              },
-            )
-          ],
-        ),
-      ),
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        //it is transparent
-        shadowColor: Colors.transparent,
-        scrolledUnderElevation: 1.0,
-        elevation: 0.0,
-        bottomOpacity: 1.0,
-        toolbarOpacity: 1.0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.transparent,
-        title: Text(
-          'Title',
-          style: TextStyle(
-              color: Colors.black, backgroundColor: Colors.transparent),
-        ),
-        leading: //Profile Icon/Pic will come here
-            GestureDetector(
-          child: Container(
-            padding:
-                EdgeInsets.only(bottom: 8.0, right: 8.0, left: 5.0, top: 5.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.blue,
-              radius: 70.0,
+          ),
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            //it is transparent
+            shadowColor: Colors.transparent,
+            scrolledUnderElevation: 1.0,
+            elevation: 0.0,
+            bottomOpacity: 1.0,
+            toolbarOpacity: 1.0,
+            backgroundColor: Colors.transparent,
+            foregroundColor: Colors.transparent,
+            title: Text(
+              'Title',
+              style: TextStyle(
+                  color: Colors.black, backgroundColor: Colors.transparent),
             ),
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.elliptical(30.0, 30.0),
+            leading: //Profile Icon/Pic will come here
+                GestureDetector(
+              child: Container(
+                padding: EdgeInsets.only(
+                    bottom: 8.0, right: 8.0, left: 5.0, top: 5.0),
+                child: CircleAvatar(
+                  backgroundColor: Colors.blue,
+                  radius: 70.0,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.elliptical(30.0, 30.0),
+                  ),
+                ),
               ),
+              onTap: () => _key.currentState!.openDrawer(),
             ),
+            actions: //Hero animation will come here, it will be the only thing in this list
+                [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Hero(
+                  tag: 'appIconTransition',
+                  child: Image.asset('assets/images/handshake.png'),
+                ),
+              ),
+            ],
           ),
-          onTap: () => _key.currentState!.openDrawer(),
-        ),
-        actions: //Hero animation will come here, it will be the only thing in this list
-            [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Hero(
-              tag: 'appIconTransition',
-              child: Image.asset('assets/images/handshake.png'),
-            ),
-          ),
-        ],
-      ),
-      body: ListView.builder(
-        itemBuilder: ((context, index) {
-          return listOfAllCategoricalTiles[index];
-        }),
-        itemCount: listOfAllCategoricalTiles.length,
-      ),
+          body: ListView.builder(
+            itemBuilder: ((context, index) {
+              return listOfAllCategoricalTiles[index];
+            }),
+            itemCount: listOfAllCategoricalTiles.length,
+          )),
     );
   }
 }
