@@ -49,3 +49,6 @@ app.*.map.json
 #give_easy related
 assets/images/blue-heart-health.png
 assets/images/red-cross-image.jpg
+
+#Node Js related
+node_modules
