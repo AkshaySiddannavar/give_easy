@@ -34,6 +34,7 @@ class _CategoricalTileState extends State<CategoricalTile> {
 
     final getAllRequestsOfACategory = await requestCollectionRef
         .where("category", isEqualTo: categoryName)
+        .where("status", isEqualTo: "active")
         .get()
         .then((value) => value,
             onError: (e) => print("************\n$e\n***********"));
