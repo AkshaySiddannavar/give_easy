@@ -11,6 +11,7 @@ module.exports = {
     "plugin:import/typescript",
     "google",
     "plugin:@typescript-eslint/recommended",
+    "plugin:jsdoc/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -21,6 +22,7 @@ module.exports = {
     "/lib/**/*", // Ignore built files.
   ],
   plugins: [
+    "jsdoc",
     "@typescript-eslint",
     "import",
   ],
