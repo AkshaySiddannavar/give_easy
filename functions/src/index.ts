@@ -1,43 +1,108 @@
 // Entry point for defining all cloud functions
 import * as functions from "firebase-functions";
-import * as admin from 'firebase-admin';
+import * as admin from "firebase-admin";
 // used to access Admin SDK functionality
 
-admin.initializeApp() //Initialize an admin app instance from which Cloud Firestore changes can be made
+admin.initializeApp();
 
-// Start writing Firebase Functions
-// https://firebase.google.com/docs/functions/typescript
-
-export const helloWorld = functions.https.onRequest((request, response) => {
-  functions.logger.info("Hello logs!", {structuredData: true});
-  response.send("Hello from Firebase!");
-});
+const db = admin.firestore();
 
 /**
- * 
- * 1. Writing Cloud Functions
-
- * Syntax for Cloud Functions:
-
-   export const functionName = functions.firestore.document('/messages/{documentId}')
-    .onCreate((snap, context) => {
-      // Grab the current value of what was written to Firestore.
-      const original = snap.data().original;
-
-      // Access the parameter `{documentId}` with `context.params`
-      functions.logger.log('Uppercasing', context.params.documentId, original);
-      
-      const uppercase = original.toUpperCase();
-      
-      // You must return a Promise when performing asynchronous tasks inside a Functions such as
-      // writing to Firestore.
-      // Setting an 'uppercase' field in Firestore document returns a Promise.
-      return snap.ref.set({uppercase}, {merge: true});
-    });
-
-    2. Deploying 
-    
-    - When we deploy a cloud function it is better if we use [firebase deploy --debug --only functions]
-
-    After deploying we get a function URL using which we can trigger that function
+ *
  */
+export const updateCollectedAmount = functions.firestore.
+    document("/user-donation-data/{documentId}").
+    onCreate(async (snap, context) =>{
+      const donationData = snap.data();
+
+      console.log(donationData);
+
+      const donationTitle: string = donationData["title"];
+      const donationAmount: number = donationData["amount"];
+
+      const requestDataQuery = db.collection("/specific-request-data").
+          where("title", "==", donationTitle).
+          where("status", "==", "active").get();
+
+      const documentData = (await requestDataQuery).docs[0];
+
+      const requestData = documentData.data();
+      const requestDocumentID = documentData.id;
+
+
+      const originalCollectedAmount
+        :number =
+        requestData["collectedAmount"];
+
+      const newCollectedAmount
+        :number =
+        originalCollectedAmount +
+        donationAmount;
+
+      return db.
+          doc(`/specific-request-data/${requestDocumentID}`).
+          update({"collectedAmount": newCollectedAmount}).
+          then(
+              ()=>console.log("update ran")
+          ).
+          catch((error)=>{
+            console.log(error);
+            return 0;
+          });
+    }
+    );
+
+
+console.log("after function");
+
+export const updateStatus = functions.firestore.
+    document("/specific-request-data/{documentID}").
+    onWrite((snap, context)=>{
+      if (snap.before.exists == false) {
+      // create
+        const requestData = snap.after.data();
+        const requestDataID = snap.after.id;
+
+        if (
+        requestData!["status"] == "active" &&
+        requestData!["collectedAmount"]>=requestData!["goalAmount"]) {
+          return db.
+              doc(`/specific-request-data/${requestDataID}`).
+              update({"status": "inactive"}).
+              then(()=>console.log("status is made inactive")).
+              catch((error)=>console.log(error));
+        } else {
+          console.log("status is in proper state");
+          return 0;
+        }
+      } else if (snap.after.exists == true) {
+        // update
+        const requestData = snap.after.data();
+        const requestDataID = snap.before.id;
+
+        if (requestData!["status"] == "active" &&
+      requestData!["collectedAmount"]>=requestData!["goalAmount"]) {
+          return db.
+              doc(`/specific-request-data/${requestDataID}`).
+              update({"status": "inactive"}).
+              then(()=>console.log("status is made inactive")).
+              catch((error)=>console.log(error));
+        } else {
+          console.log("status is in proper state");
+          return 0;
+        }
+      } else if (snap.after.exists == false) {
+        // delete
+        console.log("document deleted");
+        return 0;
+        // for now
+        // only possible manually
+      } else {
+        // To handle
+        // all other cases
+        console.log(
+            `Error is of type\n${context.eventType}`
+        );
+        return 0;
+      }
+    });
