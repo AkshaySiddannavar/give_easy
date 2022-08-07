@@ -84,6 +84,7 @@ class _SpecificDonationScreenState extends State<SpecificDonationScreen> {
                                 40)
                             ? "${donationData["description"].toString().substring(0, 40)}..."
                             : donationData["description"],
+                        donationTitle: donationData["title"],
                       )));
         },
         verticalPadding: 0.0,
