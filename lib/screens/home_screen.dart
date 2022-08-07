@@ -89,105 +89,138 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserData>(
-      builder: (context, userDataObject, child) => Scaffold(
-          drawerEnableOpenDragGesture: false,
-          key: _key,
-          drawer: Drawer(
-            child: ListView(
-              children: [
-                DrawerHeader(
-                    child: Text(
-                        'Header')), //add profile image and user's name here
-                ListTile(
-                    title: Text('Profile'),
-                    onTap: () {
-                      Navigator.pushNamed(context, ProfileScreen.id);
-                    }),
-                ListTile(
-                    title: Text('Your Gives'),
-                    onTap: () {
-                      Navigator.pushNamed(context, YourGivesScreen.id);
-                    }),
-                ListTile(
-                    title: Text('Create A Request'),
-                    onTap: () {
-                      Navigator.pushNamed(context, CreateRequestScreen.id);
-                    }),
-                ListTile(
-                    title: Text('Current Request'),
-                    onTap: () {
-                      Navigator.pushNamed(context, CurrentRequestScreen.id);
-                    }),
-                ListTile(
-                    title: Text('Past Requests'),
-                    onTap: () {
-                      Navigator.pushNamed(context, PastRequestsScreen.id);
-                    }),
-                SizedBox(
-                  height: 80.0,
-                ),
-                ActionButton(
-                  buttonText: 'Sign Out',
-                  buttonActionCallback: () {
-                    _auth.signOut();
+    return Consumer<UserData>(builder: (context, userDataObject, child) {
+      String username = userDataObject.profileData["userName"];
+      String usernameDisplay = (username.length > 12)
+          ? "${username.substring(0, 12)}+..."
+          : username;
+      int lengthOfUsername = username.length;
+      String userImageInitials = username.substring(0, 1).toUpperCase() +
+          username.substring(lengthOfUsername - 1).toUpperCase();
 
-                    Navigator.pushReplacementNamed(context, LandingScreen.id);
-                  },
-                )
-              ],
-            ),
-          ),
-          extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            //it is transparent
-            shadowColor: Colors.transparent,
-            scrolledUnderElevation: 1.0,
-            elevation: 0.0,
-            bottomOpacity: 1.0,
-            toolbarOpacity: 1.0,
-            backgroundColor: Colors.transparent,
-            foregroundColor: Colors.transparent,
-            title: Text(
-              'Title',
-              style: TextStyle(
-                  color: Colors.black, backgroundColor: Colors.transparent),
-            ),
-            leading: //Profile Icon/Pic will come here
-                GestureDetector(
-              child: Container(
-                padding: EdgeInsets.only(
-                    bottom: 8.0, right: 8.0, left: 5.0, top: 5.0),
-                child: CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  radius: 70.0,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.amber,
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.elliptical(30.0, 30.0),
-                  ),
+      return Scaffold(
+        drawerEnableOpenDragGesture: false,
+        key: _key,
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: [
+                    CircleAvatar(
+                      //profile picture(later if time permits) or initials
+                      radius: 55.0,
+                      backgroundColor: Color.fromARGB(
+                          245,
+                          (lengthOfUsername / (lengthOfUsername - 1) * 10)
+                              .toInt(),
+                          (lengthOfUsername / (lengthOfUsername - 3) * 50)
+                              .toInt(),
+                          (lengthOfUsername / (lengthOfUsername - 2) * 95)
+                              .toInt()),
+                      child: Text(
+                        userImageInitials,
+                        style: TextStyle(
+                            fontSize: 40.0, fontWeight: FontWeight.w300),
+                      ),
+                    ),
+                    Flexible(child: SizedBox(width: 10)),
+                    Text(usernameDisplay),
+                  ],
                 ),
               ),
-              onTap: () => _key.currentState!.openDrawer(),
-            ),
-            actions: //Hero animation will come here, it will be the only thing in this list
-                [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Hero(
-                  tag: 'appIconTransition',
-                  child: Image.asset('assets/images/handshake.png'),
-                ),
+              //add profile image and user's name here
+              ListTile(
+                  title: Text('Profile'),
+                  onTap: () {
+                    Navigator.pushNamed(context, ProfileScreen.id);
+                  }),
+              ListTile(
+                  title: Text('Your Gives'),
+                  onTap: () {
+                    Navigator.pushNamed(context, YourGivesScreen.id);
+                  }),
+              ListTile(
+                  title: Text('Create A Request'),
+                  onTap: () {
+                    Navigator.pushNamed(context, CreateRequestScreen.id);
+                  }),
+              ListTile(
+                  title: Text('Current Request'),
+                  onTap: () {
+                    Navigator.pushNamed(context, CurrentRequestScreen.id);
+                  }),
+              ListTile(
+                  title: Text('Past Requests'),
+                  onTap: () {
+                    Navigator.pushNamed(context, PastRequestsScreen.id);
+                  }),
+              SizedBox(
+                height: 80.0,
               ),
+              ActionButton(
+                buttonText: 'Sign Out',
+                buttonActionCallback: () {
+                  _auth.signOut();
+
+                  Navigator.pushReplacementNamed(context, LandingScreen.id);
+                },
+              )
             ],
           ),
-          body: ListView.builder(
-            itemBuilder: ((context, index) {
-              return listOfAllCategoricalTiles[index];
-            }),
-            itemCount: listOfAllCategoricalTiles.length,
-          )),
-    );
+        ),
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          //it is transparent
+          shadowColor: Colors.transparent,
+          scrolledUnderElevation: 1.0,
+          elevation: 0.0,
+          bottomOpacity: 1.0,
+          toolbarOpacity: 1.0,
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.transparent,
+          title: Text(
+            'Title',
+            style: TextStyle(
+                color: Colors.black, backgroundColor: Colors.transparent),
+          ),
+          leading: //Profile Icon/Pic will come here
+              GestureDetector(
+            child: Container(
+              padding:
+                  EdgeInsets.only(bottom: 8.0, right: 8.0, left: 5.0, top: 5.0),
+              child: CircleAvatar(
+                backgroundColor: Colors.blue,
+                radius: 70.0,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.elliptical(30.0, 30.0),
+                ),
+              ),
+            ),
+            onTap: () => _key.currentState!.openDrawer(),
+          ),
+          actions: //Hero animation will come here, it will be the only thing in this list
+              [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Hero(
+                tag: 'appIconTransition',
+                child: Image.asset('assets/images/handshake.png'),
+              ),
+            ),
+          ],
+        ),
+        body: ListView.builder(
+          itemBuilder: ((context, index) {
+            return listOfAllCategoricalTiles[index];
+          }),
+          itemCount: listOfAllCategoricalTiles.length,
+        ),
+      );
+    });
   }
 }
