@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/constants.dart';
+import 'package:give_easy/donation_data_API/donation_data_api.dart';
 import 'package:give_easy/screens/all_screens.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -11,11 +12,12 @@ class PaymentScreen extends StatefulWidget {
   static const String id = "payment_screen";
   final String organizationName;
   final String donationDescriptionShort;
-
+  final String donationTitle;
   const PaymentScreen(
       {Key? key,
       this.organizationName = 'NO ORGANITAITON',
-      this.donationDescriptionShort = 'NO DESCRIPTIONS'})
+      this.donationDescriptionShort = 'NO DESCRIPTIONS',
+      this.donationTitle = 'NO TITLE'})
       : super(key: key);
 
   @override
@@ -34,6 +36,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   String currentString = '';
   num currentNum = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+  }
 
   void openCheckout() async {
     var options = {
@@ -65,19 +75,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
     //further payment is handled by razor pay
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-  }
-
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     //Do something when payment succeeds, show a widget of confirmation and/or re-direct to Thank You screen
     print(
         'Order ID : ${response.orderId} \nPayment ID : ${response.paymentId} \nSignature: ${response.signature}');
     //order ID : null | Payment ID : somevlaue | Signature: null
+    DonationDataAPI.addDonationEntry(
+        widget.donationTitle, currentNum.toDouble(), _currentUser!.uid);
+
     Navigator.pushNamed(context, ThankYouScreen.id);
     showToast(
       'Payment Successful ✅',
