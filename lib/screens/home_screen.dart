@@ -5,6 +5,7 @@ import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/components/categorical_tile.dart';
 import 'package:give_easy/components/information_card.dart';
 import 'package:give_easy/components/preview_card.dart';
+import 'package:give_easy/information_data_API/information_data_api.dart';
 import 'package:give_easy/screens/all_screens.dart';
 import 'package:give_easy/screens/create_request.dart';
 import 'package:give_easy/screens/current_request.dart';
@@ -26,10 +27,8 @@ List<CategoricalTile> listOfAllCategoricalTiles = [
   CategoricalTile(
     categoryName: 'Basic Information',
     categorySpecificList: [
-      InformationCard(),
-      InformationCard(),
-      InformationCard(),
-      InformationCard(),
+      InformationCard(displayTextTitle: 'give'),
+      InformationCard(displayTextTitle: 'request'),
     ],
   ),
   CategoricalTile(categoryName: 'Clothe Aid', fetchListFromFirestore: true),
@@ -191,8 +190,20 @@ class _HomeScreenState extends State<HomeScreen> {
               padding:
                   EdgeInsets.only(bottom: 8.0, right: 8.0, left: 5.0, top: 5.0),
               child: CircleAvatar(
-                backgroundColor: Colors.blue,
-                radius: 70.0,
+                //profile picture(later if time permits) or initials
+                radius: 55.0,
+                backgroundColor: Color.fromARGB(
+                    245,
+                    (lengthOfUsername / (lengthOfUsername - 1) * 10).toInt(),
+                    (lengthOfUsername / (lengthOfUsername - 3) * 50).toInt(),
+                    (lengthOfUsername / (lengthOfUsername - 2) * 95).toInt()),
+                child: Text(
+                  userImageInitials,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
               ),
               decoration: BoxDecoration(
                 color: Colors.amber,
