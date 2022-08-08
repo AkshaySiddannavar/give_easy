@@ -30,18 +30,25 @@ class InformationCard extends StatelessWidget {
           //replace it with padding later on if required
 
           decoration: BoxDecoration(
-              color: Colors.pinkAccent, //to see extent of container
+              // color: Colors.pinkAccent, //to see extent of container
 
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
 
           child: Flex(
               direction:
-                  Axis.horizontal, //change direction in case required later on
+                  Axis.vertical, //change direction in case required later on
 
               children: [
                 Flexible(
-                  child: Text(displayTextTitle),
+                  child: Center(
+                      child: Text(
+                    displayTextTitle == 'give'
+                        ? 'What\'s a\n      $displayTextTitle?'
+                        : 'What\'s a\n$displayTextTitle?',
+                    style: TextStyle(fontSize: 25),
+                  )),
                 ),
+                Center(child: Text('Tap To Learn')),
               ]
               //We use Flex > Flexible so that we can change size of Text from its original size
               ),
