@@ -31,8 +31,12 @@ class _InformationScreenState extends State<InformationScreen> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text("Data"),
+                  Text(
+                    widget.title,
+                    style: TextStyle(fontSize: 40),
+                  ),
                   Text(description),
                 ],
               );
