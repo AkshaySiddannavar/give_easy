@@ -180,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.transparent,
           foregroundColor: Colors.transparent,
           title: Text(
-            'Title',
+            'Give Easy',
             style: TextStyle(
                 color: Colors.black, backgroundColor: Colors.transparent),
           ),
@@ -230,6 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return listOfAllCategoricalTiles[index];
           }),
           itemCount: listOfAllCategoricalTiles.length,
+          padding: EdgeInsets.only(top: 90),
         ),
       );
     });
