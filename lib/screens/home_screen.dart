@@ -39,14 +39,6 @@ List<CategoricalTile> listOfAllCategoricalTiles = [
       categoryName: 'Homeless people Aid', fetchListFromFirestore: true),
   CategoricalTile(categoryName: 'War Relief Aid', fetchListFromFirestore: true),
   CategoricalTile(categoryName: 'Water Aid', fetchListFromFirestore: true),
-  CategoricalTile(categoryName: 'Category 1', categorySpecificList: [
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-    PreviewCard(previewImage: Image.asset('assets/images/handshake.png')),
-  ]),
 ];
 
 final _firestore = FirebaseFirestore.instance;
