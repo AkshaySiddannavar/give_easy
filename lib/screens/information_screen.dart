@@ -25,13 +25,13 @@ class _InformationScreenState extends State<InformationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.greenAccent, //change later if required
         body: FutureBuilder(
           future: setDescription(widget.title),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 20),
@@ -39,12 +39,16 @@ class _InformationScreenState extends State<InformationScreen> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         '${widget.title.substring(0, 1).toUpperCase() + widget.title.substring(1)}',
-                        style: TextStyle(fontSize: 40),
+                        style: TextStyle(fontSize: 50),
                       ),
                     ),
                   ),
+                  Flexible(
+                      child: SizedBox(
+                    height: 50,
+                  )),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 25),
                     child: Text(
                       description,
                       style: TextStyle(fontSize: 30),
