@@ -149,100 +149,101 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Form(
-              child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                height: 20.0,
-              ),
-              TextFormField(
-                onChanged: (currentTitle) {
-                  title = currentTitle;
-                  //no need to call setState() we aren't going to re-build screen for this
-                  //value of variable will be changed internall though no setState will be called
-                },
-                decoration: kInputTextFieldDecoration.copyWith(
-                    hintText: 'Enter Title of Request'),
-              ),
-              TextFormField(
-                onChanged: (currentDescription) {
-                  description = currentDescription;
-                },
-                decoration: kInputTextFieldDecoration.copyWith(
-                    hintText: 'Enter Description of Request'),
-              ),
-              TextFormField(
-                keyboardType:
-                    TextInputType.phone, //For simpler input of numbers
-                decoration: kInputTextFieldDecoration.copyWith(
-                    hintText: 'Enter Goal Amount of Request'),
-                onChanged: (typedAmount) {
-                  goalAmount = num.parse(typedAmount).toDouble();
-                },
-              ),
-              DropdownButton(
-                // Initial Value
-                value: dropdownValue,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Request Creation Form'),
+      ),
+      body: SingleChildScrollView(
+        child: Form(
+            child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: 20.0,
+            ),
+            TextFormField(
+              onChanged: (currentTitle) {
+                title = currentTitle;
+                //no need to call setState() we aren't going to re-build screen for this
+                //value of variable will be changed internall though no setState will be called
+              },
+              decoration: kInputTextFieldDecoration.copyWith(
+                  hintText: 'Enter Title of Request'),
+            ),
+            TextFormField(
+              onChanged: (currentDescription) {
+                description = currentDescription;
+              },
+              decoration: kInputTextFieldDecoration.copyWith(
+                  hintText: 'Enter Description of Request'),
+              maxLines: 10,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.phone, //For simpler input of numbers
+              decoration: kInputTextFieldDecoration.copyWith(
+                  hintText: 'Enter Goal Amount of Request'),
+              onChanged: (typedAmount) {
+                goalAmount = num.parse(typedAmount).toDouble();
+              },
+            ),
+            DropdownButton(
+              // Initial Value
+              value: dropdownValue,
 
-                // Down Arrow Icon
-                icon: const Icon(Icons.keyboard_arrow_down),
+              // Down Arrow Icon
+              icon: const Icon(Icons.keyboard_arrow_down),
 
-                // Array list of items
-                items: categories.map((String items) {
-                  return DropdownMenuItem(
-                    value: items,
-                    child: Text(items),
-                  );
-                }).toList(),
-                // After selecting the desired option,it will
-                // change button value to selected value
-                onChanged: (String? newValue) {
-                  setState(() {
-                    dropdownValue = newValue!;
-                    currentCategorySelected = dropdownValue;
-                  });
-                },
-              ),
-              ActionButton(
-                  buttonText: 'Select Preview Image',
-                  buttonActionCallback: selectFile),
-              Text('Preview Image Name : ${p.basename(file.path)}'),
-              ActionButton(
-                  buttonText: 'Upload Preview Image',
-                  buttonActionCallback: uploadFile),
-              Text(
-                'Upload Progress:\n$progress',
-                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
-              ),
-              ActionButton(
-                buttonText: 'Request for a new category',
-                buttonActionCallback: () {
-                  Navigator.pushNamed(context, NewCategoryRequestScreen.id);
-                },
-              ),
-              ActionButton(
-                buttonText: 'Create',
-                buttonActionCallback: () {
-                  setNewRequestMap();
+              // Array list of items
+              items: categories.map((String items) {
+                return DropdownMenuItem(
+                  value: items,
+                  child: Text(items),
+                );
+              }).toList(),
+              // After selecting the desired option,it will
+              // change button value to selected value
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownValue = newValue!;
+                  currentCategorySelected = dropdownValue;
+                });
+              },
+            ),
+            ActionButton(
+                buttonText: 'Select Preview Image',
+                buttonActionCallback: selectFile),
+            Text('Preview Image Name : ${p.basename(file.path)}'),
+            ActionButton(
+                buttonText: 'Upload Preview Image',
+                buttonActionCallback: uploadFile),
+            Text(
+              'Upload Progress:\n$progress',
+              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
+            ),
+            ActionButton(
+              buttonText: 'Request for a new category',
+              buttonActionCallback: () {
+                Navigator.pushNamed(context, NewCategoryRequestScreen.id);
+              },
+            ),
+            ActionButton(
+              buttonText: 'Create',
+              buttonActionCallback: () {
+                setNewRequestMap();
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ValidationScreen(
-                        newRequestData: currentRequestData,
-                      ),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ValidationScreen(
+                      newRequestData: currentRequestData,
                     ),
-                  );
-                },
-                isActive: uploadIsActive,
-              ),
-            ],
-          )),
-        ),
+                  ),
+                );
+              },
+              isActive: uploadIsActive,
+            ),
+          ],
+        )),
       ),
     );
   }
