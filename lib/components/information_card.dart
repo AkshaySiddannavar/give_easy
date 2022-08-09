@@ -55,6 +55,7 @@ class InformationCard extends StatelessWidget {
         ),
 
         decoration: BoxDecoration(
+            //gradient: LinearGradient() to add some good looks
             color: Colors.lightBlue, //to identify extent of outer container
             borderRadius: BorderRadius.all(Radius.elliptical(20.0, 20.0))),
       ),
