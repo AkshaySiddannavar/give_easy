@@ -255,6 +255,7 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
+                  textAlign: TextAlign.center,
                   'Upload Progress:\n$progress',
                   style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
                 ),
@@ -262,7 +263,7 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: ActionButton(
-                  buttonText: 'Create',
+                  buttonText: 'Create Request',
                   buttonActionCallback: () {
                     setNewRequestMap();
 
