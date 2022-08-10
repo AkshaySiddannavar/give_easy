@@ -146,61 +146,67 @@ class _ValidationScreenState extends State<ValidationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Text('Organization\nName'),
-              Expanded(
-                child: TextField(
-                  decoration: kInputTextFieldDecoration,
-                  onChanged: (value) {
-                    if (value.isNotEmpty) {
-                      setState(() {});
-                      organizationName = value;
-                    }
-                  },
+      appBar: AppBar(
+        title: Text('Validation Screen'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text('Organization\nName'),
+                Expanded(
+                  child: TextField(
+                    decoration: kInputTextFieldDecoration,
+                    onChanged: (value) {
+                      if (value.isNotEmpty) {
+                        setState(() {});
+                        organizationName = value;
+                      }
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Text('Organization Membership Proof'),
-          ActionButton(
-              buttonText: 'Select File', buttonActionCallback: selectFile),
-          Container(
-            child: Text('File Selected ' + file.toString()),
-          ),
-          ActionButton(
-              buttonText: 'Upload File', buttonActionCallback: uploadFile),
-          Text(
-            '$progress',
-            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
-            textAlign: TextAlign.center,
-          ),
-          ActionButton(
-            buttonText: 'Create Request',
-            buttonActionCallback: () {
-              setNewRequestMap();
-              uploadRequestData(); //upload data into firestore
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Text('Organization Membership Proof'),
+            ActionButton(
+                buttonText: 'Select File', buttonActionCallback: selectFile),
+            Container(
+              child: Text('File Selected ' + file.toString()),
+            ),
+            ActionButton(
+                buttonText: 'Upload File', buttonActionCallback: uploadFile),
+            Text(
+              '$progress',
+              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
+              textAlign: TextAlign.center,
+            ),
+            ActionButton(
+              buttonText: 'Create Request',
+              buttonActionCallback: () {
+                setNewRequestMap();
+                uploadRequestData(); //upload data into firestore
 
-              print(
-                  '*************************\n$fileDownloadURL\n*****************');
+                print(
+                    '*************************\n$fileDownloadURL\n*****************');
 
-              Navigator.pushNamed(context, RequestCreationSuccessScreen.id);
-            },
-            isActive: ((progress == 100.0) &&
-                    (organizationName.isNotEmpty) &&
-                    downloadURLReady)
-                ? true
-                : false,
-          )
-        ],
+                Navigator.pushNamed(context, RequestCreationSuccessScreen.id);
+              },
+              isActive: ((progress == 100.0) &&
+                      (organizationName.isNotEmpty) &&
+                      downloadURLReady)
+                  ? true
+                  : false,
+            )
+          ],
+        ),
       ),
     );
   }
