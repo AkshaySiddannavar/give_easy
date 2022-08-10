@@ -146,48 +146,78 @@ class _ValidationScreenState extends State<ValidationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Validation Screen'),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text('Organization\nName'),
-                Expanded(
-                  child: TextField(
-                    decoration: kInputTextFieldDecoration,
-                    onChanged: (value) {
-                      if (value.isNotEmpty) {
-                        setState(() {});
-                        organizationName = value;
-                      }
-                    },
-                  ),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: TextField(
+                decoration: kInputTextFieldDecoration.copyWith(
+                    hintText: '', labelText: 'Organization Name'),
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    setState(() {});
+                    organizationName = value;
+                  }
+                },
+              ),
             ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Text('Organization Membership Proof'),
-            ActionButton(
-                buttonText: 'Select File', buttonActionCallback: selectFile),
-            Container(
-              child: Text('File Selected ' + file.toString()),
-            ),
-            ActionButton(
-                buttonText: 'Upload File', buttonActionCallback: uploadFile),
             Text(
-              '$progress',
+              'Enter Name of Organization Organizing This Fundraiser',
+              style: TextStyle(color: Colors.grey),
+              textAlign: TextAlign.center,
+            ),
+            Flexible(
+              child: SizedBox(
+                height: 35.0,
+              ),
+            ),
+            Text(
+              'Upload Proof of Your Membership\nIn Organization',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 15),
+            ),
+            ActionButton(
+              buttonText: 'Select File',
+              buttonActionCallback: selectFile,
+              buttonColor: Colors.blueAccent,
+            ),
+            Flexible(
+                child: SizedBox(
+              height: 10,
+            )),
+            Text(
+              'Selected File:\n' +
+                  ((p.basename(file.path).toString() == '')
+                      ? 'None'
+                      : p.basename(file.path).toString()),
+              style: TextStyle(fontSize: 15),
+              textAlign: TextAlign.center,
+            ),
+            Flexible(
+                child: SizedBox(
+              height: 30,
+            )),
+            ActionButton(
+              buttonText: 'Upload File',
+              buttonActionCallback: uploadFile,
+              buttonColor: Colors.blueAccent,
+            ),
+            Text(
+              'Upload Progress:\n$progress%',
               style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
               textAlign: TextAlign.center,
             ),
+            Flexible(
+                child: SizedBox(
+              height: 30,
+            )),
             ActionButton(
               buttonText: 'Create Request',
               buttonActionCallback: () {
@@ -199,6 +229,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
 
                 Navigator.pushNamed(context, RequestCreationSuccessScreen.id);
               },
+              buttonColor: Colors.blueAccent,
               isActive: ((progress == 100.0) &&
                       (organizationName.isNotEmpty) &&
                       downloadURLReady)
