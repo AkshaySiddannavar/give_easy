@@ -262,15 +262,6 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: ActionButton(
-                    buttonText: 'Request for a new category',
-                    buttonActionCallback: () {
-                      Navigator.pushNamed(context, NewCategoryRequestScreen.id);
-                    },
-                    buttonColor: Colors.blueAccent),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: ActionButton(
                   buttonText: 'Create',
                   buttonActionCallback: () {
                     setNewRequestMap();
@@ -295,3 +286,13 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
     );
   }
 }
+
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 8.0),
+              //   child: ActionButton(
+              //       buttonText: 'Request for a new category',
+              //       buttonActionCallback: () {
+              //         Navigator.pushNamed(context, NewCategoryRequestScreen.id);
+              //       },
+              //       buttonColor: Colors.blueAccent),
+              // ),
