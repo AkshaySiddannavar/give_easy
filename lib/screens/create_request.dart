@@ -36,11 +36,11 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
   //This will be passed on to valdiation screen
   //Only uploaded into firestore after validation is successful
 
-  String dropdownValue = 'Please Select Category';
+  String dropdownValue = 'Select Category';
 
   // List of items in our dropdown menu
   List<String> categories = [
-    'Please Select Category',
+    'Select Category',
     'Clothe Aid',
     'Disaster Relief Aid',
     'Food Aid',
@@ -155,94 +155,141 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
       ),
       body: SingleChildScrollView(
         child: Form(
-            child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: 20.0,
-            ),
-            TextFormField(
-              onChanged: (currentTitle) {
-                title = currentTitle;
-                //no need to call setState() we aren't going to re-build screen for this
-                //value of variable will be changed internall though no setState will be called
-              },
-              decoration: kInputTextFieldDecoration.copyWith(
-                  hintText: 'Enter Title of Request'),
-            ),
-            TextFormField(
-              onChanged: (currentDescription) {
-                description = currentDescription;
-              },
-              decoration: kInputTextFieldDecoration.copyWith(
-                  hintText: 'Enter Description of Request'),
-              maxLines: 10,
-            ),
-            TextFormField(
-              keyboardType: TextInputType.phone, //For simpler input of numbers
-              decoration: kInputTextFieldDecoration.copyWith(
-                  hintText: 'Enter Goal Amount of Request'),
-              onChanged: (typedAmount) {
-                goalAmount = num.parse(typedAmount).toDouble();
-              },
-            ),
-            DropdownButton(
-              // Initial Value
-              value: dropdownValue,
+            child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: 20.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextFormField(
+                  onChanged: (currentTitle) {
+                    title = currentTitle;
+                    //no need to call setState() we aren't going to re-build screen for this
+                    //value of variable will be changed internall though no setState will be called
+                  },
+                  decoration: kInputTextFieldDecoration.copyWith(
+                      hintText: '', labelText: 'Enter Title of Request'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextFormField(
+                  onChanged: (currentDescription) {
+                    description = currentDescription;
+                  },
+                  decoration: kInputTextFieldDecoration.copyWith(
+                    hintText: 'Enter Description of Request',
+                  ),
+                  maxLines: 15,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextFormField(
+                  keyboardType:
+                      TextInputType.phone, //For simpler input of numbers
+                  decoration: kInputTextFieldDecoration.copyWith(
+                      hintText: '', labelText: 'Enter Goal Amount of Request'),
+                  onChanged: (typedAmount) {
+                    goalAmount = num.parse(typedAmount).toDouble();
+                  },
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: DropdownButton(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  // Initial Value
+                  value: dropdownValue,
 
-              // Down Arrow Icon
-              icon: const Icon(Icons.keyboard_arrow_down),
+                  // Down Arrow Icon
+                  icon: const Icon(Icons.keyboard_arrow_down),
 
-              // Array list of items
-              items: categories.map((String items) {
-                return DropdownMenuItem(
-                  value: items,
-                  child: Text(items),
-                );
-              }).toList(),
-              // After selecting the desired option,it will
-              // change button value to selected value
-              onChanged: (String? newValue) {
-                setState(() {
-                  dropdownValue = newValue!;
-                  currentCategorySelected = dropdownValue;
-                });
-              },
-            ),
-            ActionButton(
-                buttonText: 'Select Preview Image',
-                buttonActionCallback: selectFile),
-            Text('Preview Image Name : ${p.basename(file.path)}'),
-            ActionButton(
-                buttonText: 'Upload Preview Image',
-                buttonActionCallback: uploadFile),
-            Text(
-              'Upload Progress:\n$progress',
-              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
-            ),
-            ActionButton(
-              buttonText: 'Request for a new category',
-              buttonActionCallback: () {
-                Navigator.pushNamed(context, NewCategoryRequestScreen.id);
-              },
-            ),
-            ActionButton(
-              buttonText: 'Create',
-              buttonActionCallback: () {
-                setNewRequestMap();
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ValidationScreen(
-                      newRequestData: currentRequestData,
+                  // Array list of items
+                  items: categories.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  // After selecting the desired option,it will
+                  // change button value to selected value
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                      currentCategorySelected = dropdownValue;
+                    });
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: ActionButton(
+                    buttonText: 'Select Preview Image',
+                    buttonActionCallback: selectFile,
+                    buttonColor: Colors.blueAccent),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Center(
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    'Preview Image Name:\n${p.basename(file.path)}',
+                    style: TextStyle(
+                      color: Colors.grey,
                     ),
                   ),
-                );
-              },
-              isActive: uploadIsActive,
-            ),
-          ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: ActionButton(
+                    buttonText: 'Upload Preview Image',
+                    buttonActionCallback: uploadFile,
+                    buttonColor: Colors.blueAccent),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  'Upload Progress:\n$progress',
+                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: ActionButton(
+                    buttonText: 'Request for a new category',
+                    buttonActionCallback: () {
+                      Navigator.pushNamed(context, NewCategoryRequestScreen.id);
+                    },
+                    buttonColor: Colors.blueAccent),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: ActionButton(
+                  buttonText: 'Create',
+                  buttonActionCallback: () {
+                    setNewRequestMap();
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ValidationScreen(
+                          newRequestData: currentRequestData,
+                        ),
+                      ),
+                    );
+                  },
+                  buttonColor: Colors.blueAccent,
+                  isActive: uploadIsActive,
+                ),
+              ),
+            ],
+          ),
         )),
       ),
     );
