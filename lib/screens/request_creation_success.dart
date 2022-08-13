@@ -50,13 +50,6 @@ class _RequestCreationSuccessScreenState
     return path;
   }
 
-  Text _display(String text) {
-    return Text(
-      text,
-      style: const TextStyle(color: Colors.white, fontSize: 20),
-    );
-  }
-
   void triggerConfetti() {
     _controllerCenter.play();
   }
