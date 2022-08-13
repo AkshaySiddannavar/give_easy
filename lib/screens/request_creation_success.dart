@@ -89,6 +89,16 @@ class _RequestCreationSuccessScreenState
         ),
 
         Align(
+          alignment: Alignment.bottomCenter,
+          child: ActionButton(
+            buttonText: 'Yayy!',
+            buttonActionCallback: () =>
+                Navigator.pushReplacementNamed(context, HomeScreen.id),
+            buttonColor: Color.fromARGB(255, 141, 219, 255),
+          ),
+        ),
+
+        Align(
           alignment: Alignment.center,
           child: ConfettiWidget(
             confettiController: _controllerCenter,
@@ -107,10 +117,6 @@ class _RequestCreationSuccessScreenState
             numberOfParticles: 4,
           ),
         ),
-        ActionButton(
-            buttonText: 'Yay!',
-            buttonActionCallback: () =>
-                Navigator.pushReplacementNamed(context, HomeScreen.id)),
       ]),
     );
   }
