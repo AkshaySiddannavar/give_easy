@@ -59,6 +59,7 @@ class _RequestCreationSuccessScreenState
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => triggerConfetti());
     return Scaffold(
+      backgroundColor: Colors.lightBlueAccent,
       body: Stack(children: [
         //STAR Confetti
 
