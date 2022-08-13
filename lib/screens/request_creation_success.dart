@@ -62,6 +62,31 @@ class _RequestCreationSuccessScreenState
       backgroundColor: Colors.lightBlueAccent,
       body: Stack(children: [
         //STAR Confetti
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Text(
+                '\t\t\t\t\t\t🎊\nWoohoo!\n\t\t\t\t\t 🤩',
+                style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white),
+              ),
+            ),
+            Flexible(
+                child: SizedBox(
+              height: 30,
+            )),
+            Text(
+              'Request Created\n   Successfully ',
+              style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white),
+            ),
+          ],
+        ),
 
         Align(
           alignment: Alignment.center,
