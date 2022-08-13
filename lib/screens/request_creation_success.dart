@@ -58,31 +58,35 @@ class _RequestCreationSuccessScreenState
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => triggerConfetti());
-    return Stack(children: [
-      //STAR Confetti
-      Align(
-        alignment: Alignment.center,
-        child: ConfettiWidget(
-          confettiController: _controllerCenter,
-          blastDirectionality: BlastDirectionality
-              .explosive, // don't specify a direction, blast randomly
-          shouldLoop: false, // start again as soon as the animation is finished
-          colors: const [
-            Colors.green,
-            Colors.blue,
-            Colors.pink,
-            Colors.orange,
-            Colors.purple
-          ], // manually specify the colors to be used
-          createParticlePath: drawStar, // define a custom shape/path.
-          numberOfParticles: 4,
+    return Scaffold(
+      body: Stack(children: [
+        //STAR Confetti
+
+        Align(
+          alignment: Alignment.center,
+          child: ConfettiWidget(
+            confettiController: _controllerCenter,
+            blastDirectionality: BlastDirectionality
+                .explosive, // don't specify a direction, blast randomly
+            shouldLoop:
+                false, // start again as soon as the animation is finished
+            colors: const [
+              Colors.green,
+              Colors.blue,
+              Colors.pink,
+              Colors.orange,
+              Colors.purple
+            ], // manually specify the colors to be used
+            createParticlePath: drawStar, // define a custom shape/path.
+            numberOfParticles: 4,
+          ),
         ),
-      ),
-      ActionButton(
-          buttonText: 'Yay!',
-          buttonActionCallback: () =>
-              Navigator.pushReplacementNamed(context, HomeScreen.id)),
-    ]);
+        ActionButton(
+            buttonText: 'Yay!',
+            buttonActionCallback: () =>
+                Navigator.pushReplacementNamed(context, HomeScreen.id)),
+      ]),
+    );
   }
 
   @override
