@@ -29,6 +29,13 @@
             {
               "client_id": "976142245865-qp8hguqbjpetof7vj0nc3tkqeiqudnqt.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "976142245865-baapjk0nopvs2c0e8jk7gm53cgfk5i6e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "giveeasy.co.giveEasy"
+              }
             }
           ]
         }

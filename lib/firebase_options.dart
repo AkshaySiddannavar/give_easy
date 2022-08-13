@@ -3,8 +3,6 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -27,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -72,8 +67,17 @@ class DefaultFirebaseOptions {
     messagingSenderId: '976142245865',
     projectId: 'give-easy',
     storageBucket: 'give-easy.appspot.com',
-    iosClientId:
-        '976142245865-baapjk0nopvs2c0e8jk7gm53cgfk5i6e.apps.googleusercontent.com',
+    iosClientId: '976142245865-baapjk0nopvs2c0e8jk7gm53cgfk5i6e.apps.googleusercontent.com',
     iosBundleId: 'giveeasy.co.giveEasy',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBlvC-Uhw4sYfK4AUDlp4bJWSS3BvC7rH0',
+    appId: '1:976142245865:ios:d81732f594a7747eb53578',
+    messagingSenderId: '976142245865',
+    projectId: 'give-easy',
+    storageBucket: 'give-easy.appspot.com',
+    iosClientId: '976142245865-47q25al4pt42mqrhuqct43qj1d3so01u.apps.googleusercontent.com',
+    iosBundleId: 'giveeasy.co.giveeasy.giveEasy',
   );
 }
