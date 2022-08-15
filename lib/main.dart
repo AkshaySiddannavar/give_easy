@@ -3,7 +3,6 @@ import 'package:give_easy/screens/all_screens.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:give_easy/screens/create_request.dart';
 import 'package:give_easy/screens/current_request.dart';
-import 'package:give_easy/screens/new_category_reuest.dart';
 import 'package:give_easy/screens/past_requests.dart';
 import 'package:give_easy/screens/payment_screen.dart';
 import 'package:give_easy/screens/profile.dart';
