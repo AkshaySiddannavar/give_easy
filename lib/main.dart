@@ -55,7 +55,6 @@ class GiveEasy extends StatelessWidget {
           ProfileScreen.id: (context) => ProfileScreen(),
           ValidationScreen.id: (context) => ValidationScreen(),
           YourGivesScreen.id: (context) => YourGivesScreen(),
-          NewCategoryRequestScreen.id: (context) => NewCategoryRequestScreen(),
           RequestCreationSuccessScreen.id: (context) =>
               RequestCreationSuccessScreen(),
           EmailEditScreen.id: (context) => EmailEditScreen(),
