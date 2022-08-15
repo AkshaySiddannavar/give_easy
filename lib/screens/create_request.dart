@@ -4,7 +4,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/constants.dart';
-import 'package:give_easy/screens/new_category_reuest.dart';
 import 'package:give_easy/screens/request_creation_success.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:give_easy/screens/validation.dart';
@@ -287,13 +286,3 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
     );
   }
 }
-
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(vertical: 8.0),
-              //   child: ActionButton(
-              //       buttonText: 'Request for a new category',
-              //       buttonActionCallback: () {
-              //         Navigator.pushNamed(context, NewCategoryRequestScreen.id);
-              //       },
-              //       buttonColor: Colors.blueAccent),
-              // ),
