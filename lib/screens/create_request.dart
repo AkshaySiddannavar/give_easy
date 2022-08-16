@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/constants.dart';
@@ -70,7 +71,11 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
 
     if (result != null) {
       setState(() {});
-      file = File(result.files.single.path!);
+      if (kIsWeb) {
+        file = File(result.files.first.bytes.toString());
+      } else {
+        file = File(result.files.single.path!);
+      }
     } else {
       //TODO: Show some toast(later)
     }
@@ -237,7 +242,11 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
                 child: Center(
                   child: Text(
                     textAlign: TextAlign.center,
-                    'Preview Image Name:\n${p.basename(file.path)}',
+                    (kIsWeb)
+                        ? (file.path.toString().isNotEmpty)
+                            ? 'Image File Successfully Selected'
+                            : 'Please Select An Image File\n'
+                        : 'Preview Image Name:\n${p.basename(file.path)}',
                     style: TextStyle(
                       color: Colors.grey,
                     ),
