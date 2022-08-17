@@ -44,9 +44,7 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
     'Clothe Aid',
     'Disaster Relief Aid',
     'Food Aid',
-    'Homeless people Aid',
     'War Relief Aid',
-    'Water Aid'
   ];
   //All categories
   /*
