@@ -35,10 +35,7 @@ List<CategoricalTile> listOfAllCategoricalTiles = [
   CategoricalTile(
       categoryName: 'Disaster Relief Aid', fetchListFromFirestore: true),
   CategoricalTile(categoryName: 'Food Aid', fetchListFromFirestore: true),
-  CategoricalTile(
-      categoryName: 'Homeless people Aid', fetchListFromFirestore: true),
   CategoricalTile(categoryName: 'War Relief Aid', fetchListFromFirestore: true),
-  CategoricalTile(categoryName: 'Water Aid', fetchListFromFirestore: true),
 ];
 
 final _firestore = FirebaseFirestore.instance;
