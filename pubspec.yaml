@@ -46,6 +46,7 @@ dependencies:
   confetti: ^0.7.0
   cloud_firestore: ^3.1.17
   cloud_functions: ^3.3.3
+  cached_network_image: ^3.2.1
 
 dev_dependencies:
   flutter_test:
