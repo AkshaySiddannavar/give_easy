@@ -93,29 +93,34 @@ class _HomeScreenState extends State<HomeScreen> {
           child: ListView(
             children: [
               DrawerHeader(
-                child: Flex(
-                  direction: Axis.horizontal,
-                  children: [
-                    CircleAvatar(
-                      //profile picture(later if time permits) or initials
-                      radius: 55.0,
-                      backgroundColor: Color.fromARGB(
-                          245,
-                          (lengthOfUsername / (lengthOfUsername - 1) * 10)
-                              .toInt(),
-                          (lengthOfUsername / (lengthOfUsername - 3) * 50)
-                              .toInt(),
-                          (lengthOfUsername / (lengthOfUsername - 2) * 95)
-                              .toInt()),
-                      child: Text(
-                        userImageInitials,
-                        style: TextStyle(
-                            fontSize: 40.0, fontWeight: FontWeight.w300),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, ProfileScreen.id);
+                  },
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: [
+                      CircleAvatar(
+                        //profile picture(later if time permits) or initials
+                        radius: 55.0,
+                        backgroundColor: Color.fromARGB(
+                            245,
+                            (lengthOfUsername / (lengthOfUsername - 1) * 10)
+                                .toInt(),
+                            (lengthOfUsername / (lengthOfUsername - 3) * 50)
+                                .toInt(),
+                            (lengthOfUsername / (lengthOfUsername - 2) * 95)
+                                .toInt()),
+                        child: Text(
+                          userImageInitials,
+                          style: TextStyle(
+                              fontSize: 40.0, fontWeight: FontWeight.w300),
+                        ),
                       ),
-                    ),
-                    Flexible(child: SizedBox(width: 10)),
-                    Text(usernameDisplay),
-                  ],
+                      Flexible(child: SizedBox(width: 10)),
+                      Text(usernameDisplay),
+                    ],
+                  ),
                 ),
               ),
               //add profile image and user's name here
