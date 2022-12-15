@@ -219,12 +219,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        body: ListView.builder(
-          itemBuilder: ((context, index) {
-            return listOfAllCategoricalTiles[index];
-          }),
-          itemCount: listOfAllCategoricalTiles.length,
-          padding: EdgeInsets.only(top: 90),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 12.0),
+          child: ListView.builder(
+            itemBuilder: ((context, index) {
+              return listOfAllCategoricalTiles[index];
+            }),
+            itemCount: listOfAllCategoricalTiles.length,
+            padding: EdgeInsets.only(top: 90),
+          ),
         ),
       );
     });
