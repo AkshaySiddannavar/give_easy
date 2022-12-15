@@ -78,7 +78,7 @@ class _CategoricalTileState extends State<CategoricalTile> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      height: 200.0,
+      height: 220.0,
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,11 +88,17 @@ class _CategoricalTileState extends State<CategoricalTile> {
             //replace with padding later if required
             //using container in order to see extent of this widget with color property
 
-            color: Colors.orangeAccent,
+            // color: Color(0xFFFFAB40),
 
             child: Text(
               widget.categoryName,
               textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w900,
+                  decoration: TextDecoration.underline,
+                  decorationThickness: 2.35,
+                  decorationColor: Colors.greenAccent),
             ),
           ),
           SizedBox(
