@@ -35,26 +35,20 @@ class PreviewCard extends StatelessWidget {
             width: 125.0,
             padding: EdgeInsets.all(10.0),
             decoration: BoxDecoration(
-                color:
-                    Colors.tealAccent, //to identify extent of outer container
+                // boxShadow: ,
+                color: Colors.white70, //to identify extent of outer container
                 borderRadius: BorderRadius.all(Radius.elliptical(20.0, 20.0))),
-            child: Container(
-              //inner container
-              //replace it with padding later on if required
-
-              decoration: BoxDecoration(
-                  color: Colors.redAccent, //to see extent of container
-
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-
-              child: Flex(
-                  direction: Axis
-                      .horizontal, //change direction in case required later on
-
-                  children: [Flexible(child: previewImage)]
-                  //We use Flex > Flexible so that we can change size of image from its original size
-                  ),
-            ),
+            child: Flex(
+                direction: Axis
+                    .horizontal, //change direction in case required later on
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                      child: AspectRatio(
+                          aspectRatio: 15.0 / 11.0, child: previewImage))
+                ]
+                //We use Flex > Flexible so that we can change size of image from its original size
+                ),
           ),
           Text(
             title.length > 20 ? '${title.substring(0, 19)}...' : title,
