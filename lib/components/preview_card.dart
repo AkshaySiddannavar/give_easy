@@ -53,6 +53,13 @@ class PreviewCard extends StatelessWidget {
           Text(
             title.length > 20 ? '${title.substring(0, 19)}...' : title,
             textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w900,
+              // decoration: TextDecoration.underline,
+              // decorationThickness: 2.35,
+              // decorationColor: Colors.greenAccent
+            ),
           )
         ],
       ),
