@@ -33,11 +33,7 @@ class PreviewCard extends StatelessWidget {
           Container(
             height: 125.0,
             width: 125.0,
-            padding: EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-                // boxShadow: ,
-                color: Colors.white70, //to identify extent of outer container
-                borderRadius: BorderRadius.all(Radius.elliptical(20.0, 20.0))),
+            padding: EdgeInsets.all(5.0),
             child: Flex(
                 direction: Axis
                     .horizontal, //change direction in case required later on
