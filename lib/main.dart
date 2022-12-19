@@ -39,6 +39,7 @@ class GiveEasy extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         initialRoute: LandingScreen.id,
         routes: {
           LandingScreen.id: (context) => LandingScreen(),
