@@ -56,7 +56,13 @@ class InformationCard extends StatelessWidget {
 
         decoration: BoxDecoration(
             //gradient: LinearGradient() to add some good looks
-            color: Colors.lightBlue, //to identify extent of outer container
+            gradient: LinearGradient(colors: [
+              Colors.greenAccent,
+              Color.fromARGB(218, 1, 246, 222),
+              Color.fromARGB(218, 1, 246, 222),
+              Color.fromARGB(255, 70, 173, 246)
+            ]),
+            color: Colors.greenAccent, //to identify extent of outer container
             borderRadius: BorderRadius.all(Radius.elliptical(20.0, 20.0))),
       ),
     );
