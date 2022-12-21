@@ -87,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
           username.substring(lengthOfUsername - 1).toUpperCase();
 
       return Scaffold(
+        backgroundColor: const Color.fromARGB(251, 229, 243, 249),
         drawerEnableOpenDragGesture: false,
         key: _key,
         drawer: Drawer(
