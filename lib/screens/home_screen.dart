@@ -91,6 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
         drawerEnableOpenDragGesture: false,
         key: _key,
         drawer: Drawer(
+          backgroundColor: const Color.fromARGB(251, 229, 243, 249),
           child: ListView(
             children: [
               DrawerHeader(
@@ -119,34 +120,81 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Flexible(child: SizedBox(width: 10)),
-                      Text(usernameDisplay),
+                      Text(
+                        usernameDisplay,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
+
               //add profile image and user's name here
               ListTile(
-                  title: Text('Profile'),
+                  title: Text(
+                    'Profile',
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                        decoration: TextDecoration.underline,
+                        decorationThickness: 2.35,
+                        decorationColor: Colors.greenAccent),
+                  ),
                   onTap: () {
                     Navigator.pushNamed(context, ProfileScreen.id);
                   }),
               ListTile(
-                  title: Text('Your Gives'),
+                  title: Text(
+                    'Your Gives',
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                        decoration: TextDecoration.underline,
+                        decorationThickness: 2.35,
+                        decorationColor: Colors.greenAccent),
+                  ),
                   onTap: () {
                     Navigator.pushNamed(context, YourGivesScreen.id);
                   }),
               ListTile(
-                  title: Text('Create A Request'),
+                  title: Text(
+                    'Create A Request',
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                        decoration: TextDecoration.underline,
+                        decorationThickness: 2.35,
+                        decorationColor: Colors.greenAccent),
+                  ),
                   onTap: () {
                     Navigator.pushNamed(context, CreateRequestScreen.id);
                   }),
               ListTile(
-                  title: Text('Current Request'),
+                  title: Text(
+                    'Current Request',
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                        decoration: TextDecoration.underline,
+                        decorationThickness: 2.35,
+                        decorationColor: Colors.greenAccent),
+                  ),
                   onTap: () {
                     Navigator.pushNamed(context, CurrentRequestScreen.id);
                   }),
               ListTile(
-                  title: Text('Past Requests'),
+                  title: Text(
+                    'Past Requests',
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                        decoration: TextDecoration.underline,
+                        decorationThickness: 2.35,
+                        decorationColor: Colors.greenAccent),
+                  ),
                   onTap: () {
                     Navigator.pushNamed(context, PastRequestsScreen.id);
                   }),
@@ -154,10 +202,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 80.0,
               ),
               ActionButton(
+                buttonColor: Colors.black,
+                textColor: Color(0xFF00FFA4), //Colors.black,
                 buttonText: 'Sign Out',
                 buttonActionCallback: () {
                   _auth.signOut();
-
                   Navigator.pushReplacementNamed(context, LandingScreen.id);
                 },
               )
