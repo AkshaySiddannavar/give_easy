@@ -177,13 +177,15 @@ class _HomeScreenState extends State<HomeScreen> {
             decoration: BoxDecoration(
                 // color: Colors.greenAccent,
                 ),
-            child: Text(
-              'Give Easy',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-                color: Colors.black,
-                // backgroundColor: Colors.greenAccent,
+            child: Center(
+              child: Text(
+                'Give Easy',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  color: Colors.black,
+                  // backgroundColor: Colors.greenAccent,
+                ),
               ),
             ),
           ),
