@@ -90,15 +90,18 @@ class _CategoricalTileState extends State<CategoricalTile> {
 
             // color: Color(0xFFFFAB40),
 
-            child: Text(
-              widget.categoryName,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w900,
-                  decoration: TextDecoration.underline,
-                  decorationThickness: 2.35,
-                  decorationColor: Colors.greenAccent),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+              child: Text(
+                widget.categoryName,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w900,
+                    decoration: TextDecoration.underline,
+                    decorationThickness: 2.35,
+                    decorationColor: Colors.greenAccent),
+              ),
             ),
           ),
           SizedBox(
