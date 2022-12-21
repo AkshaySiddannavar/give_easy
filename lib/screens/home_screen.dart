@@ -166,21 +166,31 @@ class _HomeScreenState extends State<HomeScreen> {
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           //it is transparent
-          shadowColor: Colors.transparent,
+          shadowColor: Colors.black45,
           scrolledUnderElevation: 1.0,
           elevation: 0.0,
           bottomOpacity: 1.0,
           toolbarOpacity: 1.0,
           backgroundColor: Colors.transparent,
           foregroundColor: Colors.transparent,
-          title: Text(
-            'Give Easy',
-            style: TextStyle(
-                color: Colors.black, backgroundColor: Colors.transparent),
+          title: Container(
+            decoration: BoxDecoration(
+                // color: Colors.greenAccent,
+                ),
+            child: Text(
+              'Give Easy',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                color: Colors.black,
+                // backgroundColor: Colors.greenAccent,
+              ),
+            ),
           ),
           leading: //Profile Icon/Pic will come here
               GestureDetector(
             child: Container(
+              // color: Colors.greenAccent,
               padding:
                   EdgeInsets.only(bottom: 8.0, right: 8.0, left: 5.0, top: 5.0),
               child: CircleAvatar(
@@ -200,9 +210,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               decoration: BoxDecoration(
-                color: Colors.amber,
+                color: Colors.greenAccent,
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.elliptical(30.0, 30.0),
+                  topRight: Radius.elliptical(30.0, 30.0),
                 ),
               ),
             ),
@@ -210,8 +221,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           actions: //Hero animation will come here, it will be the only thing in this list
               [
-            Padding(
+            Container(
               padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.greenAccent,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.elliptical(30.0, 30.0),
+                  topLeft: Radius.elliptical(30.0, 30.0),
+                ),
+              ),
               child: Hero(
                 tag: 'appIconTransition',
                 child: Image.asset('assets/images/handshake.png'),
