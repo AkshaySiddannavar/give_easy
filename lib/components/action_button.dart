@@ -6,6 +6,7 @@ class ActionButton extends StatelessWidget {
   final String buttonText;
   final void Function()? buttonActionCallback;
   final Color buttonColor;
+  final Color textColor;
   final double verticalPadding;
   final double horizontalPadding;
   final bool isActive;
@@ -15,6 +16,7 @@ class ActionButton extends StatelessWidget {
       required this.buttonText,
       required this.buttonActionCallback,
       this.buttonColor = Colors.amber,
+      this.textColor = Colors.white,
       this.horizontalPadding = 25.0,
       this.verticalPadding = 15.0,
       this.isActive = true})
@@ -54,8 +56,8 @@ class ActionButton extends StatelessWidget {
                 },
           child: Text(
             buttonText,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: textColor,
             ),
           ),
         ),
