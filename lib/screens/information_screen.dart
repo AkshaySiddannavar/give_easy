@@ -25,7 +25,7 @@ class _InformationScreenState extends State<InformationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.greenAccent, //change later if required
+        backgroundColor: Color(0xFF00FFA4), //change later if required
         body: FutureBuilder(
           future: setDescription(widget.title),
           builder: (context, snapshot) {
