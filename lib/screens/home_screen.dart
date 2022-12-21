@@ -213,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               decoration: BoxDecoration(
-                color: Colors.greenAccent,
+                color: Color(0xFF00FFA4),
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.elliptical(30.0, 30.0),
                   topRight: Radius.elliptical(30.0, 30.0),
@@ -227,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
-                color: Colors.greenAccent,
+                color: Color(0xFF00FFA4),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.elliptical(30.0, 30.0),
                   topLeft: Radius.elliptical(30.0, 30.0),
