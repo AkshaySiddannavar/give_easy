@@ -69,9 +69,11 @@ class _SpecificDonationScreenState extends State<SpecificDonationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: ActionButton(
         buttonText: 'Fund',
+        textColor: Colors.black,
         buttonActionCallback: () {
           Navigator.push(
               context,
@@ -89,7 +91,7 @@ class _SpecificDonationScreenState extends State<SpecificDonationScreen> {
         },
         verticalPadding: 0.0,
         horizontalPadding: 0.0,
-        buttonColor: Colors.greenAccent,
+        buttonColor: kGiveEasyGreen,
       ),
       body: FutureBuilder(
           future: setDonationData(widget.donationTitle),
@@ -111,6 +113,7 @@ class _SpecificDonationScreenState extends State<SpecificDonationScreen> {
               ));
             } else if (snapshot.hasData) {
               return Container(
+                color: Colors.black,
                 width: double.infinity,
                 height: double.infinity,
                 child: Flex(
@@ -128,16 +131,24 @@ class _SpecificDonationScreenState extends State<SpecificDonationScreen> {
                       fit: FlexFit.tight,
                       flex: 3,
                       child: ListView(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                         children: [
                           Text(
                             donationData["description"],
+                            style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.w400,
+                                color: kGiveEasyGreen),
                           ), //description ends
                           SizedBox(
                             height: 10.0,
                           ),
                           Text(
-                            'Description ends\nnow it is your choice to support or not \n \n \n \n',
+                            "Description Ends",
+                            // 'Description ends\nnow it is your choice to support or not \n \n \n \n',
                             textAlign: TextAlign.center,
+                            style: TextStyle(color: kGiveEasyGreen),
                           )
                         ],
                       ),

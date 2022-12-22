@@ -19,7 +19,7 @@ class TitleTile extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(image: backgroundImage.image),
         //Img.image converts an Image object into ImageProvider<Object>
-        color: Colors.pinkAccent,
+        color: kGiveEasyGreen,
         //color is just for facilitating debugging change later
       ),
       child: Row(
@@ -31,6 +31,7 @@ class TitleTile extends StatelessWidget {
               title,
               style: TextStyle(
                 backgroundColor: Colors.white54,
+                fontWeight: FontWeight.w500,
                 //color is just for facilitating debugging change later
               ),
             ),
@@ -40,6 +41,7 @@ class TitleTile extends StatelessWidget {
             child: Text(
               "By $organizationName",
               style: TextStyle(
+                fontWeight: FontWeight.w500,
                 backgroundColor: Colors.white54,
                 //color is just for facilitating debugging change later
               ),

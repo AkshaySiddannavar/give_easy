@@ -16,6 +16,8 @@ const kInputTextFieldDecoration = InputDecoration(
       Radius.circular(20.0),
     ),
   ),
+  hintStyle: TextStyle(color: Colors.black),
+  labelStyle: TextStyle(color: Colors.black),
 );
 
 const String kDefaultPreviewImagePath = 'assets/images/handshake.png';
@@ -40,7 +42,12 @@ const String kButtonDisabledMessage =
 
 const Widget kTaglineWidget = Text(
     'Your donation will be used to futher the cause that matters to you ❤️', //add tagline
-    style: TextStyle(fontSize: 15.0, color: Colors.grey),
+    style: TextStyle(fontSize: 15.0, color: Colors.black),
+    textAlign: TextAlign.center);
+
+const Widget kDarkThemeTaglineWidget = Text(
+    'Your donation will be used to futher the cause that matters to you ❤️', //add tagline
+    style: TextStyle(fontSize: 15.0, color: kGiveEasyGreen),
     textAlign: TextAlign.center);
 
 const kAllowedExtensionsForPreviewImage = [

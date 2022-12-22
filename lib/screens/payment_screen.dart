@@ -83,19 +83,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
     DonationDataAPI.addDonationEntry(
         widget.donationTitle, currentNum.toDouble(), _currentUser!.uid);
 
-    Navigator.pushNamed(context, ThankYouScreen.id);
-    showToast(
-      'Payment Successful ✅',
-      context: context,
-      animation: StyledToastAnimation.scale,
-      reverseAnimation: StyledToastAnimation.fade,
-      position: StyledToastPosition.bottom,
-      animDuration: Duration(seconds: 1),
-      duration: Duration(seconds: 4),
-      curve: Curves.elasticOut,
-      reverseCurve: Curves.linear,
-      backgroundColor: Colors.greenAccent,
-    );
+    // Navigator.pushNamed(context, ThankYouScreen(ngoName:  widget.organizationName,)
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: ((context) =>
+                ThankYouScreen(ngoName: widget.organizationName))));
+    showToast('Payment Successful ✅',
+        context: context,
+        animation: StyledToastAnimation.scale,
+        reverseAnimation: StyledToastAnimation.fade,
+        position: StyledToastPosition.bottom,
+        animDuration: Duration(seconds: 1),
+        duration: Duration(seconds: 4),
+        curve: Curves.elasticOut,
+        reverseCurve: Curves.linear,
+        backgroundColor: Colors.black,
+        textStyle: TextStyle(color: kGiveEasyGreen));
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -145,94 +149,99 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kGiveEasyGreen,
       appBar: AppBar(
         title: Text('Donation Amount Verification',
-            style: TextStyle(
-              fontSize: 18,
-            )),
+            style: kDarkAppBarTextStyle.copyWith(fontSize: 18)),
+        backgroundColor: kDarkAppBarBackgroundColor,
       ),
-      body: Flex(
-        direction: Axis.vertical,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Flexible(
-            child: SizedBox(
-              height: 30.0,
-            ),
-          ),
-          Material(
-              child: TextField(
-            decoration: InputDecoration(
-                hintText: "Enter Amount For Donation",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0))),
-            onChanged: (typedAmount) {
-              currentString = typedAmount;
-              print(currentString);
-              try {
-                currentNum = num.parse(
-                    currentString); //converting string input into number
-                if (currentNum > 0 && currentNum <= kMaxAmountAllowed) {
-                  //proper input
-                  isFundButtonActive = true;
-                  setState(() {});
-                } else {
-                  //improper input
-                  //show toast directly or call a function which will show toast and disable payment button
-                  isFundButtonActive = false;
-                  setState(() {});
-                  print('Improper Input :  $currentNum');
-                }
-              } catch (e) {
-                //show toast directly or call a function which will show toast
-                isFundButtonActive = false;
-                setState(() {});
-
-                print('Error Message is given here : $e');
-              }
-            },
-          )),
-          Flexible(
-            child: SizedBox(
-              height: 20.0,
-            ),
-          ),
-          Text(
-            donationAmountGuidelines,
-            style: TextStyle(
-              fontSize: 12.0,
-              color: Colors.grey,
-            ),
-            textAlign: TextAlign.left,
-          ),
-          Flexible(
-            child: SizedBox(
-              height: 20.0,
-            ),
-          ),
-          kTaglineWidget,
-          Flexible(
-            child: SizedBox(
-              height: 20.0,
-            ),
-          ),
-          Flexible(
-            fit: FlexFit.loose,
-            child: Center(
-              child: ActionButton(
-                buttonText: 'Fund',
-                buttonActionCallback: () {
-                  openCheckout();
-                },
-                verticalPadding: 0.0,
-                horizontalPadding: 0.0,
-                buttonColor: Colors.greenAccent,
-                isActive: isFundButtonActive,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        child: Flex(
+          direction: Axis.vertical,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Flexible(
+              child: SizedBox(
+                height: 30.0,
               ),
             ),
-          ),
-        ],
+            Material(
+                color: kGiveEasyGreen,
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Enter Amount For Donation",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  onChanged: (typedAmount) {
+                    currentString = typedAmount;
+                    print(currentString);
+                    try {
+                      currentNum = num.parse(
+                          currentString); //converting string input into number
+                      if (currentNum > 0 && currentNum <= kMaxAmountAllowed) {
+                        //proper input
+                        isFundButtonActive = true;
+                        setState(() {});
+                      } else {
+                        //improper input
+                        //show toast directly or call a function which will show toast and disable payment button
+                        isFundButtonActive = false;
+                        setState(() {});
+                        print('Improper Input :  $currentNum');
+                      }
+                    } catch (e) {
+                      //show toast directly or call a function which will show toast
+                      isFundButtonActive = false;
+                      setState(() {});
+
+                      print('Error Message is given here : $e');
+                    }
+                  },
+                )),
+            Flexible(
+              child: SizedBox(
+                height: 20.0,
+              ),
+            ),
+            Text(
+              donationAmountGuidelines,
+              style: TextStyle(
+                fontSize: 12.0,
+                color: Colors.black,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            Flexible(
+              child: SizedBox(
+                height: 20.0,
+              ),
+            ),
+            kTaglineWidget,
+            Flexible(
+              child: SizedBox(
+                height: 20.0,
+              ),
+            ),
+            Flexible(
+              fit: FlexFit.loose,
+              child: Center(
+                child: ActionButton(
+                  buttonText: 'Fund',
+                  buttonActionCallback: () {
+                    openCheckout();
+                  },
+                  verticalPadding: 0.0,
+                  horizontalPadding: 0.0,
+                  isActive: isFundButtonActive,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

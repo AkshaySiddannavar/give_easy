@@ -12,14 +12,16 @@ class ThankYouScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Material(
+        color: Colors.black,
         child: Flex(
           direction: Axis.vertical,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Flexible(
                 fit: FlexFit.loose,
                 child: Text(
                   'Thanks A Lot\nFor Your Loving Donation! 😄',
-                  style: TextStyle(fontSize: 40.0),
+                  style: kDarkAppBarTextStyle.copyWith(fontSize: 35),
                   textAlign: TextAlign.center,
                 )),
             SizedBox(
@@ -27,9 +29,12 @@ class ThankYouScreen extends StatelessWidget {
             ),
             Flexible(
               fit: FlexFit.loose,
-              child: Text(
-                'We at #${ngoName} are really grateful to you for this generous donation.',
-                style: TextStyle(fontSize: 20.0),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text(
+                  'We at ${ngoName} are really grateful to you for this generous donation.',
+                  style: kDarkAppBarTextStyle.copyWith(fontSize: 25),
+                ),
               ),
             ),
             SizedBox(
@@ -37,13 +42,16 @@ class ThankYouScreen extends StatelessWidget {
             ),
             Flexible(
               fit: FlexFit.loose,
-              child: kTaglineWidget,
+              child: kDarkThemeTaglineWidget,
             ),
             ActionButton(
-                buttonText: 'Go Back To Home',
-                buttonActionCallback: () {
-                  Navigator.pushNamed(context, HomeScreen.id);
-                }),
+              buttonText: 'Go Back To Home',
+              buttonActionCallback: () {
+                Navigator.pushNamed(context, HomeScreen.id);
+              },
+              textColor: Colors.black,
+              buttonColor: kGiveEasyGreen,
+            ),
           ],
         ),
       ),
