@@ -57,7 +57,7 @@ class ActionButton extends StatelessWidget {
           child: Text(
             buttonText,
             style: TextStyle(
-              color: textColor,
+              color: isActive ? textColor : Colors.white,
             ),
           ),
         ),
