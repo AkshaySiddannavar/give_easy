@@ -36,15 +36,15 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
   //This will be passed on to valdiation screen
   //Only uploaded into firestore after validation is successful
 
-  String dropdownValue = 'Select Category';
+  String dropdownValue = '    Select Category';
 
   // List of items in our dropdown menu
   List<String> categories = [
-    'Select Category',
-    'Clothe Aid',
-    'Disaster Relief Aid',
-    'Food Aid',
-    'War Relief Aid',
+    '    Select Category',
+    '    Clothe Aid',
+    '    Disaster Relief Aid',
+    '    Food Aid',
+    '    War Relief Aid',
   ];
   //All categories
   /*
@@ -150,8 +150,13 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kGiveEasyGreen,
       appBar: AppBar(
-        title: Text('Request Creation Form'),
+        backgroundColor: kDarkAppBarBackgroundColor,
+        title: Text(
+          'Request Creation Form',
+          style: kDarkAppBarTextStyle,
+        ),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -200,14 +205,30 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                height: 75.0,
+                decoration: BoxDecoration(
+                  border:
+                      Border.all(style: BorderStyle.none, color: Colors.black),
+                  borderRadius: BorderRadius.circular(25),
+                  color: Colors.black,
+                ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 25.0, horizontal: 10),
                 child: DropdownButton(
+                  underline: SizedBox(),
+                  dropdownColor: Colors.black,
+                  style: TextStyle(
+                    color: kGiveEasyGreen,
+                  ),
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   // Initial Value
                   value: dropdownValue,
 
                   // Down Arrow Icon
-                  icon: const Icon(Icons.keyboard_arrow_down),
+                  icon: const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: kGiveEasyGreen,
+                  ),
 
                   // Array list of items
                   items: categories.map((String items) {
@@ -229,9 +250,9 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: ActionButton(
-                    buttonText: 'Select Preview Image',
-                    buttonActionCallback: selectFile,
-                    buttonColor: Colors.blueAccent),
+                  buttonText: 'Select Preview Image',
+                  buttonActionCallback: selectFile,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -244,7 +265,8 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
                             : 'Please Select An Image File\n'
                         : 'Preview Image Name:\n${p.basename(file.path)}',
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: Color.fromARGB(208, 158, 158, 158),
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
@@ -252,9 +274,9 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: ActionButton(
-                    buttonText: 'Upload Preview Image',
-                    buttonActionCallback: uploadFile,
-                    buttonColor: Colors.blueAccent),
+                  buttonText: 'Upload Preview Image',
+                  buttonActionCallback: uploadFile,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -280,7 +302,6 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
                       ),
                     );
                   },
-                  buttonColor: Colors.blueAccent,
                   isActive: uploadIsActive,
                 ),
               ),

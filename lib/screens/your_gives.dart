@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:give_easy/constants.dart';
 import 'package:give_easy/donation_data_API/donation_data_api.dart';
 
 import '../request_data_API/request_data_firestore_api.dart';
@@ -31,8 +32,14 @@ class _YourGivesScreenState extends State<YourGivesScreen> {
         donationAmount = requestData["amount"].toString();
 
         return ListTile(
-          leading: Text('Title:\n$requestName'),
-          trailing: Text('Donated Amount:\n$donationAmount'),
+          leading: Text(
+            'Title:\n$requestName',
+            style: TextStyle(fontWeight: FontWeight.w900),
+          ),
+          trailing: Text(
+            'Donated Amount:\n$donationAmount',
+            style: TextStyle(fontWeight: FontWeight.w900),
+          ),
         );
       }),
       itemCount: length,
@@ -44,7 +51,13 @@ class _YourGivesScreenState extends State<YourGivesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Your Gives')),
+      backgroundColor: kGiveEasyGreen,
+      appBar: AppBar(
+          backgroundColor: kDarkAppBarBackgroundColor,
+          title: Text(
+            'Your Gives',
+            style: kDarkAppBarTextStyle,
+          )),
       body: FutureBuilder(
           future: renderUserDonationData(),
           builder: (context, snapshot) {

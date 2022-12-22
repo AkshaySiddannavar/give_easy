@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:give_easy/components/action_button.dart';
+import 'package:give_easy/constants.dart';
 import 'package:give_easy/request_data_API/request_data_firestore_api.dart';
 
 class PastRequestsScreen extends StatefulWidget {
@@ -33,9 +34,18 @@ class _PastRequestsScreenState extends State<PastRequestsScreen> {
             : requestData["collectedAmount"].toString();
 
         return ListTile(
-          leading: Text('Name:\n$requestName'),
-          title: Text('Goal Amount:\n$goalAmount'),
-          trailing: Text('Collected Amount:\n$collectedAmount'),
+          leading: Text(
+            'Name:\n$requestName'.substring(0, 13),
+            style: TextStyle(fontWeight: FontWeight.w900),
+          ),
+          title: Text(
+            'Goal Amount:\n$goalAmount',
+            style: TextStyle(fontWeight: FontWeight.w900),
+          ),
+          trailing: Text(
+            'Collected Amount:\n$collectedAmount',
+            style: TextStyle(fontWeight: FontWeight.w900),
+          ),
         );
       }),
       itemCount: listOfInactiveRequests.length,
@@ -52,7 +62,13 @@ class _PastRequestsScreenState extends State<PastRequestsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Past Requests')),
+      backgroundColor: kGiveEasyGreen,
+      appBar: AppBar(
+          backgroundColor: kDarkAppBarBackgroundColor,
+          title: Text(
+            'Past Requests',
+            style: kDarkAppBarTextStyle,
+          )),
       body: FutureBuilder(
           future: renderInactiveRequests(),
           builder: (context, snapshot) {

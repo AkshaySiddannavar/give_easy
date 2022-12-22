@@ -67,18 +67,17 @@ class _ValidationScreenState extends State<ValidationScreen> {
       final destinationRef =
           storageRef.child('organization_proofs/$fileUploadName');
 
-      showToast(
-        'Uploading...\nPlease wait till 100% file is uploaded',
-        context: context,
-        animation: StyledToastAnimation.scale,
-        reverseAnimation: StyledToastAnimation.fade,
-        position: StyledToastPosition.center,
-        animDuration: Duration(seconds: 1),
-        duration: Duration(seconds: 5),
-        curve: Curves.elasticOut,
-        reverseCurve: Curves.linear,
-        backgroundColor: Colors.grey,
-      );
+      showToast('Uploading...\nPlease wait till 100% file is uploaded',
+          context: context,
+          animation: StyledToastAnimation.scale,
+          reverseAnimation: StyledToastAnimation.fade,
+          position: StyledToastPosition.center,
+          animDuration: Duration(seconds: 1),
+          duration: Duration(seconds: 5),
+          curve: Curves.elasticOut,
+          reverseCurve: Curves.linear,
+          backgroundColor: Colors.black,
+          textStyle: TextStyle(color: Color(0xFF00FFA4)));
 
       final uploadTask = destinationRef
           .putFile(file); //starting the task of uploading the file
@@ -146,9 +145,14 @@ class _ValidationScreenState extends State<ValidationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kGiveEasyGreen,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Validation Screen'),
+        title: Text(
+          'Validation Screen',
+          style: kDarkAppBarTextStyle,
+        ),
+        backgroundColor: kDarkAppBarBackgroundColor,
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
@@ -170,7 +174,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
             ),
             Text(
               'Enter Name of Organization Organizing This Fundraiser',
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
             ),
             Flexible(
@@ -186,7 +190,6 @@ class _ValidationScreenState extends State<ValidationScreen> {
             ActionButton(
               buttonText: 'Select File',
               buttonActionCallback: selectFile,
-              buttonColor: Colors.blueAccent,
             ),
             Flexible(
                 child: SizedBox(
@@ -207,7 +210,6 @@ class _ValidationScreenState extends State<ValidationScreen> {
             ActionButton(
               buttonText: 'Upload File',
               buttonActionCallback: uploadFile,
-              buttonColor: Colors.blueAccent,
             ),
             Text(
               'Upload Progress:\n$progress%',
@@ -229,7 +231,6 @@ class _ValidationScreenState extends State<ValidationScreen> {
 
                 Navigator.pushNamed(context, RequestCreationSuccessScreen.id);
               },
-              buttonColor: Colors.blueAccent,
               isActive: ((progress == 100.0) &&
                       (organizationName.isNotEmpty) &&
                       downloadURLReady)

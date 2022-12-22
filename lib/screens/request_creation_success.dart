@@ -3,6 +3,7 @@ import 'package:confetti/confetti.dart';
 import 'dart:math';
 
 import 'package:give_easy/components/action_button.dart';
+import 'package:give_easy/constants.dart';
 import 'package:give_easy/screens/all_screens.dart';
 
 class RequestCreationSuccessScreen extends StatefulWidget {
@@ -59,7 +60,7 @@ class _RequestCreationSuccessScreenState
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => triggerConfetti());
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Colors.black,
       body: Stack(children: [
         //STAR Confetti
         Column(
@@ -71,7 +72,9 @@ class _RequestCreationSuccessScreenState
                 style: TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.w800,
-                    color: Colors.white),
+                    color: kGiveEasyGreen
+                    // color: Colors.black
+                    ),
               ),
             ),
             Flexible(
@@ -83,7 +86,8 @@ class _RequestCreationSuccessScreenState
               style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w800,
-                  color: Colors.white),
+                  // color: Colors.black)
+                  color: kGiveEasyGreen),
             ),
           ],
         ),
@@ -94,7 +98,11 @@ class _RequestCreationSuccessScreenState
             buttonText: 'Yayy!',
             buttonActionCallback: () =>
                 Navigator.pushReplacementNamed(context, HomeScreen.id),
-            buttonColor: Color.fromARGB(255, 141, 219, 255),
+            // buttonColor: Colors.black,
+            // textColor: kGiveEasyGreen,
+
+            buttonColor: kGiveEasyGreen,
+            textColor: Colors.black,
           ),
         ),
 

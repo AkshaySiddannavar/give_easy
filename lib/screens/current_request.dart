@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:give_easy/components/action_button.dart';
+import 'package:give_easy/constants.dart';
 import 'package:give_easy/request_data_API/request_data_firestore_api.dart';
 
 class CurrentRequestScreen extends StatefulWidget {
@@ -33,12 +34,20 @@ class _CurrentRequestScreenState extends State<CurrentRequestScreen> {
             : requestData["collectedAmount"].toString();
 
         return ListTile(
+          dense: true,
           leading: Flexible(
               child: Text(
-            'Name:\n$requestName',
+            'Name:\n$requestName'.substring(0, 13),
+            style: TextStyle(fontWeight: FontWeight.w900),
           )),
-          title: Text('Goal Amount:\n$goalAmount'),
-          trailing: Text('Collected Amount:\n$collectedAmount'),
+          title: Text(
+            'Goal Amount:\n$goalAmount',
+            style: TextStyle(fontWeight: FontWeight.w900),
+          ),
+          trailing: Text(
+            'Collected Amount:\n$collectedAmount',
+            style: TextStyle(fontWeight: FontWeight.w900),
+          ),
         );
       }),
       itemCount: listOfInactiveRequests.length,
@@ -55,7 +64,13 @@ class _CurrentRequestScreenState extends State<CurrentRequestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Current Requests')),
+      backgroundColor: kGiveEasyGreen,
+      appBar: AppBar(
+          backgroundColor: kDarkAppBarBackgroundColor,
+          title: Text(
+            'Current Requests',
+            style: kDarkAppBarTextStyle,
+          )),
       body: FutureBuilder(
           future: renderActiveRequests(),
           builder: (context, snapshot) {
