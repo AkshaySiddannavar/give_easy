@@ -5,6 +5,7 @@ import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/components/categorical_tile.dart';
 import 'package:give_easy/components/information_card.dart';
 import 'package:give_easy/components/preview_card.dart';
+import 'package:give_easy/constants.dart';
 import 'package:give_easy/information_data_API/information_data_api.dart';
 import 'package:give_easy/screens/all_screens.dart';
 import 'package:give_easy/screens/create_request.dart';
@@ -87,11 +88,13 @@ class _HomeScreenState extends State<HomeScreen> {
           username.substring(lengthOfUsername - 1).toUpperCase();
 
       return Scaffold(
-        backgroundColor: const Color.fromARGB(251, 229, 243, 249),
+        // backgroundColor: const Color.fromARGB(251, 229, 243, 249),
+        backgroundColor: Colors.black,
         drawerEnableOpenDragGesture: false,
         key: _key,
         drawer: Drawer(
-          backgroundColor: const Color.fromARGB(251, 229, 243, 249),
+          // backgroundColor: const Color.fromARGB(251, 229, 243, 249),
+          backgroundColor: kGiveEasyGreen,
           child: ListView(
             children: [
               DrawerHeader(
@@ -137,11 +140,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text(
                     'Profile',
                     style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                        decoration: TextDecoration.underline,
-                        decorationThickness: 2.35,
-                        decorationColor: Colors.greenAccent),
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      // decoration: TextDecoration.underline,
+                      // decorationThickness: 2.35,
+                      // decorationColor: Colors.greenAccent
+                    ),
                   ),
                   onTap: () {
                     Navigator.pushNamed(context, ProfileScreen.id);
@@ -150,11 +154,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text(
                     'Your Gives',
                     style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                        decoration: TextDecoration.underline,
-                        decorationThickness: 2.35,
-                        decorationColor: Colors.greenAccent),
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      // decoration: TextDecoration.underline,
+                      // decorationThickness: 2.35,
+                      // decorationColor: Colors.greenAccent,
+                    ),
                   ),
                   onTap: () {
                     Navigator.pushNamed(context, YourGivesScreen.id);
@@ -163,11 +168,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text(
                     'Create A Request',
                     style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                        decoration: TextDecoration.underline,
-                        decorationThickness: 2.35,
-                        decorationColor: Colors.greenAccent),
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      // decoration: TextDecoration.underline,
+                      // decorationThickness: 2.35,
+                      // decorationColor: Colors.greenAccent,
+                    ),
                   ),
                   onTap: () {
                     Navigator.pushNamed(context, CreateRequestScreen.id);
@@ -176,11 +182,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text(
                     'Current Request',
                     style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                        decoration: TextDecoration.underline,
-                        decorationThickness: 2.35,
-                        decorationColor: Colors.greenAccent),
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      // decoration: TextDecoration.underline,
+                      // decorationThickness: 2.35,
+                      // decorationColor: Colors.greenAccent,
+                    ),
                   ),
                   onTap: () {
                     Navigator.pushNamed(context, CurrentRequestScreen.id);
@@ -189,11 +196,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text(
                     'Past Requests',
                     style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                        decoration: TextDecoration.underline,
-                        decorationThickness: 2.35,
-                        decorationColor: Colors.greenAccent),
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      // decoration: TextDecoration.underline,
+                      // decorationThickness: 2.35,
+                      // decorationColor: Colors.greenAccent,
+                    ),
                   ),
                   onTap: () {
                     Navigator.pushNamed(context, PastRequestsScreen.id);
@@ -231,11 +239,12 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text(
                 'Give Easy',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                  color: Colors.black,
-                  // backgroundColor: Colors.greenAccent,
-                ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    color: kGiveEasyGreen
+                    // color: Colors.black,
+                    // backgroundColor: Colors.greenAccent,
+                    ),
               ),
             ),
           ),

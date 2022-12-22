@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:give_easy/constants.dart';
 import 'package:give_easy/information_data_API/information_data_api.dart';
 
 class InformationScreen extends StatefulWidget {
@@ -25,7 +26,8 @@ class _InformationScreenState extends State<InformationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFF00FFA4), //change later if required
+        // backgroundColor: Color(0xFF00FFA4), //change later if required
+        backgroundColor: Colors.black,
         body: FutureBuilder(
           future: setDescription(widget.title),
           builder: (context, snapshot) {
@@ -39,7 +41,10 @@ class _InformationScreenState extends State<InformationScreen> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         '${widget.title.substring(0, 1).toUpperCase() + widget.title.substring(1)}',
-                        style: TextStyle(fontSize: 50),
+                        style: TextStyle(
+                          fontSize: 50,
+                          color: kGiveEasyGreen,
+                        ),
                       ),
                     ),
                   ),
@@ -51,7 +56,10 @@ class _InformationScreenState extends State<InformationScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 25),
                     child: Text(
                       description,
-                      style: TextStyle(fontSize: 30),
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: kGiveEasyGreen,
+                      ),
                     ),
                   ),
                 ],
