@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:give_easy/components/action_button.dart';
 import 'package:give_easy/components/input_text_field.dart';
+import 'package:give_easy/constants.dart';
 import 'package:give_easy/user_data/user_data_change_notifier.dart';
 import 'package:provider/provider.dart';
 
@@ -21,8 +22,13 @@ class _OrganizationEditScreenState extends State<OrganizationEditScreen> {
       child: Consumer<UserData>(
         builder: (context, userDataObject, child) {
           return Scaffold(
+            backgroundColor: kGiveEasyGreen,
             appBar: AppBar(
-              title: Text('Organization Name Edit'),
+              backgroundColor: kDarkAppBarBackgroundColor,
+              title: Text(
+                'Organization Name Edit',
+                style: kDarkAppBarTextStyle,
+              ),
             ),
             body: Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
