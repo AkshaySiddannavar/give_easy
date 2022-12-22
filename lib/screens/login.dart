@@ -23,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Consumer<UserData>(
       builder: (context, userDataObject, child) => Scaffold(
+        backgroundColor: kGiveEasyGreen,
         body: SafeArea(
           child: Center(
             child: Column(

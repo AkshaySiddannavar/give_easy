@@ -40,6 +40,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
   Widget build(BuildContext context) {
     return Consumer<UserData>(
       builder: (context, userDataObject, child) => Scaffold(
+        backgroundColor: kGiveEasyGreen,
         body: SafeArea(
           child: Center(
             child: Column(
@@ -84,6 +85,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                       Flexible(
                         fit: FlexFit.loose,
                         child: RadioListTile(
+                            activeColor: Colors.black,
                             dense: true,
                             contentPadding: EdgeInsets.symmetric(
                                 horizontal: 5.0, vertical: 0.0),
@@ -103,6 +105,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                       Flexible(
                         fit: FlexFit.loose,
                         child: RadioListTile(
+                            activeColor: Colors.black,
                             dense: true,
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 5.0),
@@ -122,6 +125,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                       Flexible(
                         fit: FlexFit.loose,
                         child: RadioListTile(
+                            activeColor: Colors.black,
                             dense: true,
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 5.0),

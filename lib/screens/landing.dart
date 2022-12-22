@@ -11,32 +11,65 @@ class LandingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kGiveEasyGreen,
       body: SafeArea(
         child: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Hero(
-              tag: 'appIconTransition',
-              child: Container(
-                height: 50.0,
-                child: Image.asset('assets/images/handshake.png'),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Hero(
+                tag: 'appIconTransition',
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: kGiveEasyGreen,
+                  ),
+                  height: 75.0,
+                  child: Container(
+                      child: Image.asset('assets/images/handshake.png')),
+                ),
               ),
             ),
-            TextButton(
-              child: Text(
-                'Login',
-                style: TextStyle(),
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, LoginScreen.id);
-              },
+            Padding(
+              padding: const EdgeInsets.only(top: 25.0, bottom: 5.0),
+              child: TextButton(
+                  child: Text(
+                    'Login',
+                    style: kDarkAppBarTextStyle.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, LoginScreen.id);
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.black),
+                    shape: MaterialStateProperty.all(StadiumBorder()),
+                    padding: MaterialStateProperty.all(
+                        const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 20)),
+                  )),
             ),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, RegisterationScreen.id);
-                },
-                child: Text(
-                  'Register',
-                )),
+            Padding(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, RegisterationScreen.id);
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.black),
+                    shape: MaterialStateProperty.all(StadiumBorder()),
+                    padding: MaterialStateProperty.all(
+                        const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 20)),
+                  ),
+                  child: Text(
+                    'Register',
+                    style: kDarkAppBarTextStyle.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )),
+            ),
           ]),
         ),
       ),

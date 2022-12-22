@@ -16,7 +16,9 @@ const kInputTextFieldDecoration = InputDecoration(
       Radius.circular(20.0),
     ),
   ),
-  hintStyle: TextStyle(color: Colors.black),
+  hintStyle: TextStyle(
+    color: Colors.black,
+  ),
   labelStyle: TextStyle(color: Colors.black),
 );
 
@@ -91,3 +93,5 @@ const TextStyle kDarkAppBarTextStyle = TextStyle(
 const Color kDarkAppBarBackgroundColor = Colors.black;
 
 const Color kGiveEasyGreen = Color(0xFF00FFA4);
+
+const Color kGiveEasyBlue = Color(0xFF4AAFF7);
