@@ -74,3 +74,13 @@ const Map<String, dynamic> kDefaultRequestData = {
   "status": 'NO DATA', //Added in validationscreen [3.]
   "title": 'NO DATA', //added in create req screen [5.]
 };
+
+const TextStyle kDarkAppBarTextStyle = TextStyle(
+  color: Color(0xFF00FFA4),
+  fontSize: 25,
+  fontWeight: FontWeight.w900,
+);
+
+const Color kDarkAppBarBackgroundColor = Colors.black;
+
+const Color kGiveEasyGreen = Color(0xFF00FFA4);
