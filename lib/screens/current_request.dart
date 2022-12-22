@@ -33,7 +33,10 @@ class _CurrentRequestScreenState extends State<CurrentRequestScreen> {
             : requestData["collectedAmount"].toString();
 
         return ListTile(
-          leading: Text('Name:\n$requestName'),
+          leading: Flexible(
+              child: Text(
+            'Name:\n$requestName',
+          )),
           title: Text('Goal Amount:\n$goalAmount'),
           trailing: Text('Collected Amount:\n$collectedAmount'),
         );

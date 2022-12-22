@@ -51,9 +51,7 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
               1. Clothe Aid
               2. Disaster Relief Aid
               3. Food Aid
-              4. Homeless people Aid
               5. War Relief Aid
-              6. Water Aid
 
               7. dummy
               */

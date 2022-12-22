@@ -21,8 +21,17 @@ class _EmailEditScreenState extends State<EmailEditScreen> {
       child: Consumer<UserData>(
         builder: (context, userDataObject, child) {
           return Scaffold(
+            backgroundColor: Color(0xFF00FFA4),
             appBar: AppBar(
-              title: Text('Email Edit'),
+              backgroundColor: Colors.black,
+              title: Text(
+                'Email Edit',
+                style: TextStyle(
+                  color: Color(0xFF00FFA4),
+                  fontSize: 25,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
             ),
             body: Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
@@ -61,6 +70,8 @@ class _EmailEditScreenState extends State<EmailEditScreen> {
                       height: 10.0,
                     ),
                     ActionButton(
+                        buttonColor: Colors.black,
+                        textColor: Color(0xFF00FFA4),
                         isActive: (emailTyped != null && emailTyped.isNotEmpty)
                             ? true
                             : false,

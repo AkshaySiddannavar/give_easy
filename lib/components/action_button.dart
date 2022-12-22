@@ -15,8 +15,8 @@ class ActionButton extends StatelessWidget {
       {Key? key,
       required this.buttonText,
       required this.buttonActionCallback,
-      this.buttonColor = Colors.amber,
-      this.textColor = Colors.white,
+      this.buttonColor = Colors.black,
+      this.textColor = kGiveEasyGreen,
       this.horizontalPadding = 25.0,
       this.verticalPadding = 15.0,
       this.isActive = true})

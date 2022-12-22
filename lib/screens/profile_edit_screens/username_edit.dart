@@ -22,8 +22,17 @@ class _UsernameEditScreenState extends State<UsernameEditScreen> {
       child: Consumer<UserData>(
         builder: (context, userDataObject, child) {
           return Scaffold(
+            backgroundColor: Color(0xFF00FFA4),
             appBar: AppBar(
-              title: Text('Username Edit'),
+              backgroundColor: Colors.black,
+              title: Text(
+                'Username Edit',
+                style: TextStyle(
+                  color: Color(0xFF00FFA4),
+                  fontSize: 25,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
             ),
             body: Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
@@ -62,6 +71,8 @@ class _UsernameEditScreenState extends State<UsernameEditScreen> {
                       height: 10.0,
                     ),
                     ActionButton(
+                        buttonColor: Colors.black,
+                        textColor: Color(0xFF00FFA4),
                         isActive:
                             (usernameTyped != null && usernameTyped.isNotEmpty)
                                 ? true
