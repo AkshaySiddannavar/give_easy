@@ -64,14 +64,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     renderUserImageInitials();
     return Scaffold(
-      appBar: AppBar(title: Text('User Profile')),
+      backgroundColor: Color(0xFF00FFA4),
+      appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text(
+            'User Profile',
+            style: TextStyle(
+              color: Color(0xFF00FFA4),
+              fontSize: 25,
+              fontWeight: FontWeight.w900,
+            ),
+          )),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
-            height: 5.0,
+            height: 15.0,
           ),
           Consumer<UserData>(
             builder: (context, value, child) => Expanded(
