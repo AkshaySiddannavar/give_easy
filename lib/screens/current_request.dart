@@ -35,11 +35,16 @@ class _CurrentRequestScreenState extends State<CurrentRequestScreen> {
 
         return ListTile(
           dense: true,
-          leading: Flexible(
-              child: Text(
-            'Name:\n$requestName'.substring(0, 13),
-            style: TextStyle(fontWeight: FontWeight.w900),
-          )),
+          leading: Flex(
+            direction: Axis.vertical,
+            children: [
+              Flexible(
+                  child: Text(
+                'Name:\n$requestName'.substring(0, 13),
+                style: TextStyle(fontWeight: FontWeight.w900),
+              )),
+            ],
+          ),
           title: Text(
             'Goal Amount:\n$goalAmount',
             style: TextStyle(fontWeight: FontWeight.w900),
