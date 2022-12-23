@@ -14,19 +14,19 @@ class CurrentRequestScreen extends StatefulWidget {
 }
 
 class _CurrentRequestScreenState extends State<CurrentRequestScreen> {
-  late Widget listViewOfActiveRequests = Container();
+  late Widget listViewOfActiveRequests;
 
   static String userID = FirebaseAuth.instance.currentUser!.uid;
 
   Future<Widget> renderActiveRequests() async {
-    List listOfInactiveRequests = await RequestDataAPI.getActiveRequests(
-        userID); //list of 'inactive' documents
+    List listOfActiveRequests = await RequestDataAPI.getActiveRequests(
+        userID); //list of 'active' documents
 
     String requestName, goalAmount, collectedAmount;
     Map requestData;
     listViewOfActiveRequests = ListView.builder(
       itemBuilder: ((context, index) {
-        requestData = listOfInactiveRequests[index].data();
+        requestData = listOfActiveRequests[index].data();
         requestName = requestData["title"];
         goalAmount = requestData["goalAmount"].toString();
         collectedAmount = (requestData["collectedAmount"] == -1)
@@ -50,7 +50,7 @@ class _CurrentRequestScreenState extends State<CurrentRequestScreen> {
           ),
         );
       }),
-      itemCount: listOfInactiveRequests.length,
+      itemCount: listOfActiveRequests.length,
     );
 
     return listViewOfActiveRequests;
