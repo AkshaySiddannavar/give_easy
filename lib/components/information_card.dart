@@ -57,9 +57,10 @@ class InformationCard extends StatelessWidget {
         decoration: BoxDecoration(
             //gradient: LinearGradient() to add some good looks
             gradient: LinearGradient(colors: [
-              Color.fromARGB(218, 1, 246, 222),
-              Color.fromARGB(218, 6, 247, 223),
               Color(0xFF00FFA4),
+              Color.fromARGB(218, 1, 246, 222),
+              // Color.fromARGB(218, 6, 247, 223),
+
               // Color.fromARGB(218, 2, 235, 212),
 
               // Color.fromARGB(255, 70, 173, 246)

@@ -26,8 +26,9 @@ class _InformationScreenState extends State<InformationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color.fromARGB(251, 229, 243, 249),
         // backgroundColor: Color(0xFF00FFA4), //change later if required
-        backgroundColor: Colors.black,
+        // backgroundColor: Colors.black,
         body: FutureBuilder(
           future: setDescription(widget.title),
           builder: (context, snapshot) {
@@ -43,7 +44,8 @@ class _InformationScreenState extends State<InformationScreen> {
                         '${widget.title.substring(0, 1).toUpperCase() + widget.title.substring(1)}',
                         style: TextStyle(
                           fontSize: 50,
-                          color: kGiveEasyGreen,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -58,7 +60,8 @@ class _InformationScreenState extends State<InformationScreen> {
                       description,
                       style: TextStyle(
                         fontSize: 30,
-                        color: kGiveEasyGreen,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),

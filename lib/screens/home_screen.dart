@@ -88,8 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
           username.substring(lengthOfUsername - 1).toUpperCase();
 
       return Scaffold(
-        // backgroundColor: const Color.fromARGB(251, 229, 243, 249),
-        backgroundColor: Colors.black,
+        backgroundColor: const Color.fromARGB(251, 229, 243, 249),
+        // backgroundColor: Colors.black,
         drawerEnableOpenDragGesture: false,
         key: _key,
         drawer: Drawer(
@@ -238,13 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Center(
               child: Text(
                 'Give Easy',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    color: kGiveEasyGreen
-                    // color: Colors.black,
-                    // backgroundColor: Colors.greenAccent,
-                    ),
+                style: kDarkAppBarTextStyle.copyWith(color: Colors.black),
               ),
             ),
           ),

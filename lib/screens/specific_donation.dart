@@ -69,11 +69,10 @@ class _SpecificDonationScreenState extends State<SpecificDonationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(251, 229, 243, 249),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: ActionButton(
         buttonText: 'Fund',
-        textColor: Colors.black,
         buttonActionCallback: () {
           Navigator.push(
               context,
@@ -91,7 +90,6 @@ class _SpecificDonationScreenState extends State<SpecificDonationScreen> {
         },
         verticalPadding: 0.0,
         horizontalPadding: 0.0,
-        buttonColor: kGiveEasyGreen,
       ),
       body: FutureBuilder(
           future: setDonationData(widget.donationTitle),
@@ -113,7 +111,6 @@ class _SpecificDonationScreenState extends State<SpecificDonationScreen> {
               ));
             } else if (snapshot.hasData) {
               return Container(
-                color: Colors.black,
                 width: double.infinity,
                 height: double.infinity,
                 child: Flex(
@@ -125,6 +122,7 @@ class _SpecificDonationScreenState extends State<SpecificDonationScreen> {
                       flex: 1,
                       child: TitleTile(
                         title: donationData["title"],
+                        organizationName: donationData['organizationName'],
                       ),
                     ),
                     Flexible(
@@ -137,9 +135,9 @@ class _SpecificDonationScreenState extends State<SpecificDonationScreen> {
                           Text(
                             donationData["description"],
                             style: TextStyle(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w400,
-                                color: kGiveEasyGreen),
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ), //description ends
                           SizedBox(
                             height: 10.0,
@@ -148,7 +146,10 @@ class _SpecificDonationScreenState extends State<SpecificDonationScreen> {
                             "Description Ends",
                             // 'Description ends\nnow it is your choice to support or not \n \n \n \n',
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: kGiveEasyGreen),
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w400,
+                            ),
                           )
                         ],
                       ),

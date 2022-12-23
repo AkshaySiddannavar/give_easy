@@ -43,11 +43,13 @@ class LandingScreen extends StatelessWidget {
                     Navigator.pushNamed(context, LoginScreen.id);
                   },
                   style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size(150, 50)),
+
                     backgroundColor: MaterialStateProperty.all(Colors.black),
                     shape: MaterialStateProperty.all(StadiumBorder()),
-                    padding: MaterialStateProperty.all(
-                        const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 20)),
+                    // padding: MaterialStateProperty.all(
+                    //     const EdgeInsets.symmetric(
+                    //         vertical: 5, horizontal: 30)),
                   )),
             ),
             Padding(
@@ -57,11 +59,9 @@ class LandingScreen extends StatelessWidget {
                     Navigator.pushNamed(context, RegisterationScreen.id);
                   },
                   style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size(150, 50)),
                     backgroundColor: MaterialStateProperty.all(Colors.black),
                     shape: MaterialStateProperty.all(StadiumBorder()),
-                    padding: MaterialStateProperty.all(
-                        const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 20)),
                   ),
                   child: Text(
                     'Register',
