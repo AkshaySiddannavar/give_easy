@@ -52,3 +52,6 @@ assets/images/red-cross-image.jpg
 
 #Node Js related
 node_modules
+
+#API key realated
+api_keys.dart
